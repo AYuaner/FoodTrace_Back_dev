@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: foodtrace-auth-server
+  profiles:
+    active:
+  datasource:
+    url: jdbc:mysql://localhost:3306/foodtrace?useUnicode=true;characterEncoding=utf-8
+    username: root
+    password: ayuan520.
+    driver-class-name: com.mysql.cj.jdbc.Driver
