@@ -1,6 +1,5 @@
 package com.yuan.foodtrace.auth.dto;
 
-
 public class UserDTO {
 
     /**
@@ -69,5 +68,18 @@ public class UserDTO {
 
     public void setExpireTime(Long expireTime) {
         ExpireTime = expireTime;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", Token='" + Token + '\'' +
+                ", LoginTime=" + LoginTime +
+                ", ExpireTime=" + ExpireTime +
+                '}';
     }
 }

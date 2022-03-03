@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.dto.UserDTO;
 import com.yuan.foodtrace.auth.service.impl.TokenService;
 import com.yuan.foodtrace.auth.service.impl.UserService;
-import com.yuan.foodtrace.auth.utils.TokenUtils;
 import com.yuan.foodtrace.auth.controller.api.UserApi;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
+import java.util.ArrayList;
 
 /**
  * @author A_Yuan
  */
 @RestController
 public class UserController implements UserApi {
+    // TODO 优化权限问题：如何存储权限？从DB重新查询or存储在token中再使用枚举类
 
     @Autowired
     UserService userService;
@@ -32,15 +32,11 @@ public class UserController implements UserApi {
     @Override
     public Object login(UserDTO userDTO, HttpServletResponse response) {
         JSONObject jsonObject = new JSONObject();
-        // TODO 账号密码为空情况
         if (StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(userDTO.getPassword())) {
             jsonObject.put("message", "登录失败，账号或密码为空");
             return jsonObject;
         }
-        UserDTO userForBase = new UserDTO();
-        userForBase.setId(userService.findByUsername(userDTO).getId());
-        userForBase.setUsername(userService.findByUsername(userDTO).getUsername());
-        userForBase.setPassword(userService.findByUsername(userDTO).getPassword());
+        UserDTO userForBase = userService.findByUsername(userDTO);
         if (!StringUtils.equals(userForBase.getPassword(), userDTO.getPassword())) {
             jsonObject.put("message", "登录失败，密码错误");
         } else {
@@ -55,10 +51,19 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public String getMessage() {
-        // 取出token中带的用户id进行操作
-        System.out.println(TokenUtils.getTokenUserId());
-        return "您已经通过验证";
+    public Object getInfo(String token) {
+        JSONObject jsonObject = new JSONObject();
+
+        ArrayList<String> roles = new ArrayList<>();
+        roles.add("admin");
+
+        jsonObject.put("roles", roles);
+        jsonObject.put("introduction", "This is a fucking introduction");
+        jsonObject.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        jsonObject.put("name", "Admin");
+
+        return jsonObject;
     }
+
 
 }
