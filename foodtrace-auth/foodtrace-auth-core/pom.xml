@@ -21,13 +21,6 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
-        <!--SpringSecurity-->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>${springsecurity.oauth2.version}</version>
-        </dependency>
-
         <!--自身模块的依赖-->
         <dependency>
             <groupId>com.yuan.foodtrace</groupId>
