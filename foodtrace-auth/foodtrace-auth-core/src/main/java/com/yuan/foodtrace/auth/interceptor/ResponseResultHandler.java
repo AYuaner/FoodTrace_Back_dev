@@ -23,10 +23,10 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+        Result result = Result.success(body);
         if (body instanceof String) {
-            // FIXME Result can not cast to String
-            // return JSON.toJSONString();
+            return JSON.toJSONString(result);
         }
-        return Result.success(body);
+        return result;
     }
 }

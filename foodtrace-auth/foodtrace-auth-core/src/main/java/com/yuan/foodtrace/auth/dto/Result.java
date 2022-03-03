@@ -1,7 +1,6 @@
 package com.yuan.foodtrace.auth.dto;
 
 import com.yuan.foodtrace.auth.constant.ResultCode;
-import org.springframework.context.annotation.Bean;
 
 import java.io.Serializable;
 
