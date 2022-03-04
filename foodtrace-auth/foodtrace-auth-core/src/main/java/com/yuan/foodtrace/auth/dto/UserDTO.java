@@ -10,10 +10,6 @@ public class UserDTO {
     private String password;
     private String role;
 
-    private String Token;
-    private Long LoginTime;
-    private Long ExpireTime;
-
     public String getId() {
         return id;
     }
@@ -46,30 +42,6 @@ public class UserDTO {
         this.role = role;
     }
 
-    public String getToken() {
-        return Token;
-    }
-
-    public void setToken(String token) {
-        Token = token;
-    }
-
-    public Long getLoginTime() {
-        return LoginTime;
-    }
-
-    public void setLoginTime(Long loginTime) {
-        LoginTime = loginTime;
-    }
-
-    public Long getExpireTime() {
-        return ExpireTime;
-    }
-
-    public void setExpireTime(Long expireTime) {
-        ExpireTime = expireTime;
-    }
-
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -77,9 +49,6 @@ public class UserDTO {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", Token='" + Token + '\'' +
-                ", LoginTime=" + LoginTime +
-                ", ExpireTime=" + ExpireTime +
                 '}';
     }
 }

@@ -26,11 +26,10 @@ public interface UserApi {
     /**
      * 获取信息
      *
-     * @param token token
      * @return 结果
      */
     @UserLoginToken
     @GetMapping(value = "/auth/info")
-    Object getInfo(String token);
+    Object getInfo();
 
 }

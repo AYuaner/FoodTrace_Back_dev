@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public UserDTO findByUsername(UserDTO userDTO) {
-        UserRecord userRecord = userMapper.findByUsername(userDTO.getUsername()).orElse(new UserRecord());
+    public UserDTO findByUsername(String userName) {
+        UserRecord userRecord = userMapper.findByUsername(userName).orElse(new UserRecord());
         return MapperUtils.UserEntityToDTO(userRecord);
     }
 

@@ -20,7 +20,7 @@ public class TokenService {
         Date end = new Date(currentTime);
 
         return  JWT.create()
-                .withAudience(userDTO.getId())
+                .withAudience(userDTO.getUsername())
                 .withIssuedAt(start)
                 .withExpiresAt(end)
                 .sign(Algorithm.HMAC256(userDTO.getPassword()));

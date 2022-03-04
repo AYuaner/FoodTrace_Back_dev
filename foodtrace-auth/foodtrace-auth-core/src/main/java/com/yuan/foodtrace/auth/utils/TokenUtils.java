@@ -5,6 +5,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * 用于解析Token
@@ -13,15 +14,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TokenUtils {
 
-    public static String getTokenUserId() {
-        String token = getRequest().getHeader("token");
+    public static String getTokenUserName() {
+        String token = Objects.requireNonNull(getRequest()).getHeader("X-Token");
+        System.out.println(token);
         return JWT.decode(token).getAudience().get(0);
     }
 
     /**
      * 获取Request
      */
-    public static HttpServletRequest getRequest() {
+    private static HttpServletRequest getRequest() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         return requestAttributes == null ? null : requestAttributes.getRequest();
