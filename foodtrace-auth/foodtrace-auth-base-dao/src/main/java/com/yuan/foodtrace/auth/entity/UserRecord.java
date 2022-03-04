@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.base.dao.entity;
+package com.yuan.foodtrace.auth.entity;
 
 import java.io.Serializable;
 import javax.annotation.Generated;

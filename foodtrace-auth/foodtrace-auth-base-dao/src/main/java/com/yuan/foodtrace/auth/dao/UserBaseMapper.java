@@ -1,9 +1,8 @@
-package com.yuan.foodtrace.auth.base.dao.dao;
+package com.yuan.foodtrace.auth.dao;
 
-import static com.yuan.foodtrace.auth.base.dao.dao.UserRecordDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import com.yuan.foodtrace.auth.base.dao.entity.UserRecord;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +34,7 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface UserBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
-    BasicColumn[] selectList = BasicColumn.columnList(id, username, password, role);
+    BasicColumn[] selectList = BasicColumn.columnList(UserRecordDynamicSqlSupport.id, UserRecordDynamicSqlSupport.username, UserRecordDynamicSqlSupport.password, UserRecordDynamicSqlSupport.role);
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -74,111 +73,111 @@ public interface UserBaseMapper {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default long count(CountDSLCompleter completer) {
-        return MyBatis3Utils.countFrom(this::count, userRecord, completer);
+        return MyBatis3Utils.countFrom(this::count, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int delete(DeleteDSLCompleter completer) {
-        return MyBatis3Utils.deleteFrom(this::delete, userRecord, completer);
+        return MyBatis3Utils.deleteFrom(this::delete, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int deleteByPrimaryKey(String id_) {
         return delete(c -> 
-            c.where(id, isEqualTo(id_))
+            c.where(UserRecordDynamicSqlSupport.id, isEqualTo(id_))
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int insert(UserRecord record) {
-        return MyBatis3Utils.insert(this::insert, record, userRecord, c ->
-            c.map(id).toProperty("id")
-            .map(username).toProperty("username")
-            .map(password).toProperty("password")
-            .map(role).toProperty("role")
+        return MyBatis3Utils.insert(this::insert, record, UserRecordDynamicSqlSupport.userRecord, c ->
+            c.map(UserRecordDynamicSqlSupport.id).toProperty("id")
+            .map(UserRecordDynamicSqlSupport.username).toProperty("username")
+            .map(UserRecordDynamicSqlSupport.password).toProperty("password")
+            .map(UserRecordDynamicSqlSupport.role).toProperty("role")
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int insertMultiple(Collection<UserRecord> records) {
-        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, userRecord, c ->
-            c.map(id).toProperty("id")
-            .map(username).toProperty("username")
-            .map(password).toProperty("password")
-            .map(role).toProperty("role")
+        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, UserRecordDynamicSqlSupport.userRecord, c ->
+            c.map(UserRecordDynamicSqlSupport.id).toProperty("id")
+            .map(UserRecordDynamicSqlSupport.username).toProperty("username")
+            .map(UserRecordDynamicSqlSupport.password).toProperty("password")
+            .map(UserRecordDynamicSqlSupport.role).toProperty("role")
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int insertSelective(UserRecord record) {
-        return MyBatis3Utils.insert(this::insert, record, userRecord, c ->
-            c.map(id).toPropertyWhenPresent("id", record::getId)
-            .map(username).toPropertyWhenPresent("username", record::getUsername)
-            .map(password).toPropertyWhenPresent("password", record::getPassword)
-            .map(role).toPropertyWhenPresent("role", record::getRole)
+        return MyBatis3Utils.insert(this::insert, record, UserRecordDynamicSqlSupport.userRecord, c ->
+            c.map(UserRecordDynamicSqlSupport.id).toPropertyWhenPresent("id", record::getId)
+            .map(UserRecordDynamicSqlSupport.username).toPropertyWhenPresent("username", record::getUsername)
+            .map(UserRecordDynamicSqlSupport.password).toPropertyWhenPresent("password", record::getPassword)
+            .map(UserRecordDynamicSqlSupport.role).toPropertyWhenPresent("role", record::getRole)
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default Optional<UserRecord> selectOne(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectOne(this::selectOne, selectList, userRecord, completer);
+        return MyBatis3Utils.selectOne(this::selectOne, selectList, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default List<UserRecord> select(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectList(this::selectMany, selectList, userRecord, completer);
+        return MyBatis3Utils.selectList(this::selectMany, selectList, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default List<UserRecord> selectDistinct(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, userRecord, completer);
+        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default Optional<UserRecord> selectByPrimaryKey(String id_) {
         return selectOne(c ->
-            c.where(id, isEqualTo(id_))
+            c.where(UserRecordDynamicSqlSupport.id, isEqualTo(id_))
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int update(UpdateDSLCompleter completer) {
-        return MyBatis3Utils.update(this::update, userRecord, completer);
+        return MyBatis3Utils.update(this::update, UserRecordDynamicSqlSupport.userRecord, completer);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     static UpdateDSL<UpdateModel> updateAllColumns(UserRecord record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalTo(record::getId)
-                .set(username).equalTo(record::getUsername)
-                .set(password).equalTo(record::getPassword)
-                .set(role).equalTo(record::getRole);
+        return dsl.set(UserRecordDynamicSqlSupport.id).equalTo(record::getId)
+                .set(UserRecordDynamicSqlSupport.username).equalTo(record::getUsername)
+                .set(UserRecordDynamicSqlSupport.password).equalTo(record::getPassword)
+                .set(UserRecordDynamicSqlSupport.role).equalTo(record::getRole);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     static UpdateDSL<UpdateModel> updateSelectiveColumns(UserRecord record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalToWhenPresent(record::getId)
-                .set(username).equalToWhenPresent(record::getUsername)
-                .set(password).equalToWhenPresent(record::getPassword)
-                .set(role).equalToWhenPresent(record::getRole);
+        return dsl.set(UserRecordDynamicSqlSupport.id).equalToWhenPresent(record::getId)
+                .set(UserRecordDynamicSqlSupport.username).equalToWhenPresent(record::getUsername)
+                .set(UserRecordDynamicSqlSupport.password).equalToWhenPresent(record::getPassword)
+                .set(UserRecordDynamicSqlSupport.role).equalToWhenPresent(record::getRole);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int updateByPrimaryKey(UserRecord record) {
         return update(c ->
-            c.set(username).equalTo(record::getUsername)
-            .set(password).equalTo(record::getPassword)
-            .set(role).equalTo(record::getRole)
-            .where(id, isEqualTo(record::getId))
+            c.set(UserRecordDynamicSqlSupport.username).equalTo(record::getUsername)
+            .set(UserRecordDynamicSqlSupport.password).equalTo(record::getPassword)
+            .set(UserRecordDynamicSqlSupport.role).equalTo(record::getRole)
+            .where(UserRecordDynamicSqlSupport.id, isEqualTo(record::getId))
         );
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     default int updateByPrimaryKeySelective(UserRecord record) {
         return update(c ->
-            c.set(username).equalToWhenPresent(record::getUsername)
-            .set(password).equalToWhenPresent(record::getPassword)
-            .set(role).equalToWhenPresent(record::getRole)
-            .where(id, isEqualTo(record::getId))
+            c.set(UserRecordDynamicSqlSupport.username).equalToWhenPresent(record::getUsername)
+            .set(UserRecordDynamicSqlSupport.password).equalToWhenPresent(record::getPassword)
+            .set(UserRecordDynamicSqlSupport.role).equalToWhenPresent(record::getRole)
+            .where(UserRecordDynamicSqlSupport.id, isEqualTo(record::getId))
         );
     }
 }

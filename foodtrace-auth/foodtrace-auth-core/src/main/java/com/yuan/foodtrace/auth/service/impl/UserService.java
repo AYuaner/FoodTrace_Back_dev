@@ -1,6 +1,6 @@
 package com.yuan.foodtrace.auth.service.impl;
 
-import com.yuan.foodtrace.auth.base.dao.entity.UserRecord;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
 import com.yuan.foodtrace.auth.mapper.UserMapper;
 import com.yuan.foodtrace.auth.utils.MapperUtils;

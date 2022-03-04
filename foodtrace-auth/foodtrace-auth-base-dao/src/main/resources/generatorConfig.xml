@@ -19,8 +19,8 @@
         </jdbcConnection>
 
         <!-- dao entity设置 -->
-        <javaModelGenerator targetPackage="com.yuan.foodtrace.auth.base.dao.entity" targetProject="src/main/java"/>
-        <javaClientGenerator targetPackage="com.yuan.foodtrace.auth.base.dao.dao" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.yuan.foodtrace.auth.entity" targetProject="src/main/java"/>
+        <javaClientGenerator targetPackage="com.yuan.foodtrace.auth.dao" targetProject="src/main/java"/>
 
         <!-- 用户管理 -->
         <table tableName="user" domainObjectName="UserRecord" mapperName="UserBaseMapper"/>

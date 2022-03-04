@@ -19,6 +19,7 @@ import java.util.ArrayList;
 @RestController
 public class UserController implements UserApi {
     // TODO 优化权限问题：如何存储权限？从DB重新查询or存储在token中再使用枚举类
+    // TODO MyBatis在控制台输出日志功能
 
     @Autowired
     UserService userService;

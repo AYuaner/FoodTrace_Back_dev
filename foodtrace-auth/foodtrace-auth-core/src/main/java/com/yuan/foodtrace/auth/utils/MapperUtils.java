@@ -1,6 +1,6 @@
 package com.yuan.foodtrace.auth.utils;
 
-import com.yuan.foodtrace.auth.base.dao.entity.UserRecord;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
 
 import java.util.Objects;

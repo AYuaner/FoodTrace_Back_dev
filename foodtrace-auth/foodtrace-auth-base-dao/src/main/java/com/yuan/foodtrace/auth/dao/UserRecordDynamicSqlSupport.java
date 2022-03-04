@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.base.dao.dao;
+package com.yuan.foodtrace.auth.dao;
 
 import java.sql.JDBCType;
 import javax.annotation.Generated;
