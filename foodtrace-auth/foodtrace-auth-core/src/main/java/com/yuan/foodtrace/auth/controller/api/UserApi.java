@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author A_Yuan
  */
 @RequestMapping(value = "/auth")
-@CrossOrigin("http://localhost:9528")
+@CrossOrigin
 public interface UserApi {
 
     /**

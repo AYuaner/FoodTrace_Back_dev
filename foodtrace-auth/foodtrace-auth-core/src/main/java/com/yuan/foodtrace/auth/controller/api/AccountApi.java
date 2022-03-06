@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
  * @author A_Yuan
  */
 @RequestMapping(value = "/account")
-@CrossOrigin("http://localhost:9525")
+@CrossOrigin
 public interface AccountApi {
 
     // TODO 跨域请求改用proxy解决方案
@@ -23,11 +23,11 @@ public interface AccountApi {
     /**
      * 根据id删除账号
      *
-     * @param id ID
+     * @param userDTO 用户信息
      * @return 删除结果
      */
     @DeleteMapping(value = "/{id}")
-    Object deleteAccount(@PathVariable Long id);
+    Object deleteAccount(@RequestBody UserDTO userDTO);
 
     /**
      * 根据id查询账号
