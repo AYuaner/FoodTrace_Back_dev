@@ -2,8 +2,8 @@ package com.yuan.foodtrace.auth.controller.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.dto.UserDTO;
-import com.yuan.foodtrace.auth.service.impl.TokenService;
-import com.yuan.foodtrace.auth.service.impl.UserService;
+import com.yuan.foodtrace.auth.service.TokenService;
+import com.yuan.foodtrace.auth.service.UserService;
 import com.yuan.foodtrace.auth.controller.api.UserApi;
 import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;

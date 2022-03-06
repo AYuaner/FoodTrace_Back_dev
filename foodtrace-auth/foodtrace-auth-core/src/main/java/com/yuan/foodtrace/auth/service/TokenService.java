@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.service.impl;
+package com.yuan.foodtrace.auth.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

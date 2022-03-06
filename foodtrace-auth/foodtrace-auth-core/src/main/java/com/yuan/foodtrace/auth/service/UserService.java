@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.service.impl;
+package com.yuan.foodtrace.auth.service;
 
 import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
@@ -21,7 +21,7 @@ public class UserService {
         return MapperUtils.UserEntityToDTO(userRecord);
     }
 
-    public UserDTO findUserById(String id) {
+    public UserDTO findUserById(Long id) {
         UserRecord userRecord = userMapper.findUserById(id).orElse(new UserRecord());
         return MapperUtils.UserEntityToDTO(userRecord);
     }

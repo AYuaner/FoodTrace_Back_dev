@@ -14,7 +14,7 @@ public class UserRecord implements Serializable {
      *   唯一标识符
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.id")
-    private String id;
+    private Long id;
 
     /**
      * Database Column Remarks:
@@ -37,16 +37,23 @@ public class UserRecord implements Serializable {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.role")
     private String role;
 
+    /**
+     * Database Column Remarks:
+     *   是否启用
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
+    private Boolean enable;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     private static final long serialVersionUID = 1L;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.id")
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.id")
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,6 +87,16 @@ public class UserRecord implements Serializable {
         this.role = role;
     }
 
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
     @Override
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     public boolean equals(Object that) {
@@ -96,7 +113,8 @@ public class UserRecord implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()));
+            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+            && (this.getEnable() == null ? other.getEnable() == null : this.getEnable().equals(other.getEnable()));
     }
 
     @Override
@@ -108,6 +126,7 @@ public class UserRecord implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getEnable() == null) ? 0 : getEnable().hashCode());
         return result;
     }
 }

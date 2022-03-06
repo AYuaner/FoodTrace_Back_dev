@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author A_Yuan
  */
-@RestController
 @RequestMapping(value = "/account")
 @CrossOrigin("http://localhost:9525")
 public interface AccountApi {
@@ -28,16 +27,16 @@ public interface AccountApi {
      * @return 删除结果
      */
     @DeleteMapping(value = "/{id}")
-    Object deleteAccount(@PathVariable String id);
+    Object deleteAccount(@PathVariable Long id);
 
     /**
      * 根据id查询账号
      *
-     * @param id ID
+     * @param username 用户名
      * @return 查询结果
      */
-    @GetMapping(value = "/{id}")
-    Object getAccount(@PathVariable String id);
+    @GetMapping(value = "/{username}")
+    Object getAccount(@PathVariable String username);
 
     /**
      * 新增一个账号

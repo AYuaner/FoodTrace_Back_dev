@@ -14,7 +14,7 @@ public final class UserRecordDynamicSqlSupport {
      *   唯一标识符
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.id")
-    public static final SqlColumn<String> id = userRecord.id;
+    public static final SqlColumn<Long> id = userRecord.id;
 
     /**
      * Database Column Remarks:
@@ -37,15 +37,24 @@ public final class UserRecordDynamicSqlSupport {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.role")
     public static final SqlColumn<String> role = userRecord.role;
 
+    /**
+     * Database Column Remarks:
+     *   是否启用
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
+    public static final SqlColumn<Boolean> enable = userRecord.enable;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     public static final class UserRecord extends SqlTable {
-        public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<String> username = column("userName", JDBCType.VARCHAR);
 
         public final SqlColumn<String> password = column("password", JDBCType.VARCHAR);
 
         public final SqlColumn<String> role = column("role", JDBCType.VARCHAR);
+
+        public final SqlColumn<Boolean> enable = column("enable", JDBCType.BIT);
 
         public UserRecord() {
             super("user");

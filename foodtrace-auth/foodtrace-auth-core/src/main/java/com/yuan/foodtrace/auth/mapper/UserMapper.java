@@ -31,7 +31,7 @@ public interface UserMapper extends UserBaseMapper {
      * @param id ID
      * @return 找到的用户
      */
-    default Optional<UserRecord> findUserById(String id) {
+    default Optional<UserRecord> findUserById(Long id) {
         return selectOne(c -> c.where(UserRecordDynamicSqlSupport.id, isEqualTo(id)));
     }
 

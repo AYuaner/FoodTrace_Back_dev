@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author A_Yuan
  */
-@RestController
+@RequestMapping(value = "/auth")
 @CrossOrigin("http://localhost:9528")
 public interface UserApi {
 
@@ -20,7 +20,7 @@ public interface UserApi {
      * @param response response
      * @return jsonObject
      */
-    @PostMapping(value = "/auth/login")
+    @PostMapping(value = "/login")
     Object login(@RequestBody UserDTO userDTO, HttpServletResponse response);
 
     /**
@@ -29,7 +29,7 @@ public interface UserApi {
      * @return 结果
      */
     @UserLoginToken
-    @GetMapping(value = "/auth/info")
+    @GetMapping(value = "/info")
     Object getInfo();
 
 }
