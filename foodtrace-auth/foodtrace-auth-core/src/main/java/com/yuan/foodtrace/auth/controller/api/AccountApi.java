@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public interface AccountApi {
 
-    // TODO 跨域请求改用proxy解决方案
-
     /**
      * 获取所有账号
      *
@@ -28,15 +26,6 @@ public interface AccountApi {
      */
     @DeleteMapping(value = "/{id}")
     Object deleteAccount(@RequestBody UserDTO userDTO);
-
-    /**
-     * 根据id查询账号
-     *
-     * @param username 用户名
-     * @return 查询结果
-     */
-    @GetMapping(value = "/{username}")
-    Object getAccount(@PathVariable String username);
 
     /**
      * 新增一个账号

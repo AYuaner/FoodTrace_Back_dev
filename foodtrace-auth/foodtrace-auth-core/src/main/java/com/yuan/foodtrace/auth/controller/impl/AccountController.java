@@ -41,21 +41,27 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public Object getAccount(String username) {
-        JSONObject jsonObject = new JSONObject();
-        UserRecord result = accountService.findByUsername(username);
-        jsonObject.put("result", result);
-        return jsonObject;
-    }
-
-    @Override
     public Object newAccount(UserDTO userDTO) {
         JSONObject jsonObject = new JSONObject();
-        assert StringUtils.isNotEmpty(userDTO.getUsername());
-        assert StringUtils.isNotEmpty(userDTO.getPassword());
-        assert userDTO.getId() == null;
-        assert StringUtils.isNotEmpty(userDTO.getRole());
-        Boolean result = accountService.insert(userDTO);
+        UserDTO dto = new UserDTO();
+        dto.setUsername(userDTO.getUsername().replaceAll("\\W", ""));
+        dto.setPassword(userDTO.getPassword().replaceAll("\\W", ""));
+        dto.setRole(userDTO.getRole().replaceAll("\\W", ""));
+
+        if (StringUtils.isEmpty(dto.getUsername())) {
+            jsonObject.put("result", false);
+            return jsonObject;
+        }
+        if (StringUtils.isEmpty(dto.getPassword())) {
+            jsonObject.put("result", false);
+            return jsonObject;
+        }
+        if (StringUtils.isEmpty(dto.getRole())) {
+            jsonObject.put("result", false);
+            return jsonObject;
+        }
+
+        Boolean result = accountService.insert(dto);
         jsonObject.put("result", result);
         return jsonObject;
     }

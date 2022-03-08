@@ -30,7 +30,7 @@ public class AccountService {
         return mapper.updateEnableState(record) == 0 ? false : true;
     }
 
-    public UserRecord findByUsername(String username) {
+    private UserRecord findByUsername(String username) {
         return mapper.findByUsername(username).orElse(new UserRecord());
     }
 
