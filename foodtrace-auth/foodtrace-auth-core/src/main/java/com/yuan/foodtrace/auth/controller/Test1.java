@@ -1,6 +1,5 @@
 package com.yuan.foodtrace.auth.controller;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
