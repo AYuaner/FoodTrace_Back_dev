@@ -1,6 +1,6 @@
 package com.yuan.foodtrace.auth.utils;
 
-import com.yuan.foodtrace.auth.base.dao.entity.UserRecord;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
 
 import java.util.Objects;
@@ -19,6 +19,7 @@ public class MapperUtils {
             userDTO.setUsername(userRecord.getUsername());
             userDTO.setPassword(userRecord.getPassword());
             userDTO.setRole(userRecord.getRole());
+            userDTO.setEnable(userRecord.getEnable());
         }
         return userDTO;
     }
@@ -30,6 +31,7 @@ public class MapperUtils {
             userRecord.setUsername(userDTO.getUsername());
             userRecord.setPassword(userDTO.getPassword());
             userRecord.setRole(userDTO.getRole());
+            userRecord.setEnable(userDTO.getEnable());
         }
         return userRecord;
     }

@@ -1,8 +1,8 @@
 package com.yuan.foodtrace.auth.mapper;
 
-import com.yuan.foodtrace.auth.base.dao.dao.UserBaseMapper;
-import com.yuan.foodtrace.auth.base.dao.dao.UserRecordDynamicSqlSupport;
-import com.yuan.foodtrace.auth.base.dao.entity.UserRecord;
+import com.yuan.foodtrace.auth.dao.UserBaseMapper;
+import com.yuan.foodtrace.auth.dao.UserRecordDynamicSqlSupport;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -31,7 +31,7 @@ public interface UserMapper extends UserBaseMapper {
      * @param id ID
      * @return 找到的用户
      */
-    default Optional<UserRecord> findUserById(String id) {
+    default Optional<UserRecord> findUserById(Long id) {
         return selectOne(c -> c.where(UserRecordDynamicSqlSupport.id, isEqualTo(id)));
     }
 

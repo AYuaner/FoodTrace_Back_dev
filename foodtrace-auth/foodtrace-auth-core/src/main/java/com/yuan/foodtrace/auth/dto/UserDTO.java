@@ -1,24 +1,22 @@
 package com.yuan.foodtrace.auth.dto;
 
+import com.yuan.foodtrace.auth.entity.UserRecord;
+
 public class UserDTO {
 
-    /**
-     * from DB
-     */
-    private String id;
+    private Long id;
     private String username;
     private String password;
     private String role;
+    private Boolean enable;
 
-    private String Token;
-    private Long LoginTime;
-    private Long ExpireTime;
+    private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,40 +44,42 @@ public class UserDTO {
         this.role = role;
     }
 
-    public String getToken() {
-        return Token;
+    public Boolean getEnable() {
+        return enable;
     }
 
-    public void setToken(String token) {
-        Token = token;
-    }
-
-    public Long getLoginTime() {
-        return LoginTime;
-    }
-
-    public void setLoginTime(Long loginTime) {
-        LoginTime = loginTime;
-    }
-
-    public Long getExpireTime() {
-        return ExpireTime;
-    }
-
-    public void setExpireTime(Long expireTime) {
-        ExpireTime = expireTime;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
     @Override
-    public String toString() {
-        return "UserDTO{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", Token='" + Token + '\'' +
-                ", LoginTime=" + LoginTime +
-                ", ExpireTime=" + ExpireTime +
-                '}';
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        UserRecord other = (UserRecord) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+                && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+                && (this.getEnable() == null ? other.getEnable() == null : this.getEnable().equals(other.getEnable()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getEnable() == null) ? 0 : getEnable().hashCode());
+        return result;
     }
 }

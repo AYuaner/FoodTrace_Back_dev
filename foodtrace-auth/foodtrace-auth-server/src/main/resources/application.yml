@@ -10,3 +10,11 @@ spring:
     username: root
     password: ayuan520.
     driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    com.yuan.foodtrace.auth.dao: debug
+
+mybatis:
+  type-aliases-package: com.yuan.foodtrace.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

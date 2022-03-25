@@ -14,6 +14,9 @@ public class Test1 {
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String test(String str) {
+        if (str == null) {
+            str = new String("");
+        }
         return str;
     }
 }

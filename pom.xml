@@ -24,6 +24,7 @@
     <!--  模块说明  -->
     <modules>
         <module>foodtrace-auth</module>
+        <module>foodtrace-fabric</module>
     </modules>
 
     <!--配置-->
@@ -40,7 +41,7 @@
         <jwt.version>3.18.3</jwt.version>
         <fastjson.version>1.2.79</fastjson.version>
         <springfox.version>3.0.0</springfox.version>
-
+        <fabric.version>2.2.3</fabric.version>
     </properties>
 
     <!--依赖引入-->
@@ -74,23 +75,18 @@
             <version>${commons.lang.version}</version>
         </dependency>
 
+        <!--fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
         <!--mysql Driver-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
-        </dependency>
-
-        <!--Swagger-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
         </dependency>
 
     </dependencies>

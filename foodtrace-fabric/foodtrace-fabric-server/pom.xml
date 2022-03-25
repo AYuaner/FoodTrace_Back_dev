@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--common-->
+    <name>foodtrace-fabric-server</name>
+    <description>foodtrace-fabric-server</description>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--parent-->
+    <parent>
+        <groupId>com.yuan.foodtrace</groupId>
+        <artifactId>foodtrace-fabric</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <!--this project information-->
+    <artifactId>foodtrace-fabric-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yuan.foodtrace</groupId>
+            <artifactId>foodtrace-fabric-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
+</project>

@@ -2,7 +2,6 @@ package com.yuan.foodtrace.auth.controller.api;
 
 import com.yuan.foodtrace.auth.annotation.UserLoginToken;
 import com.yuan.foodtrace.auth.dto.UserDTO;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author A_Yuan
  */
-@RestController
-@CrossOrigin("http://localhost:9528")
+@RequestMapping(value = "/auth")
+@CrossOrigin
 public interface UserApi {
 
     /**
@@ -21,19 +20,16 @@ public interface UserApi {
      * @param response response
      * @return jsonObject
      */
-    @ApiOperation(value = "登录")
-    @PostMapping(value = "/auth/login")
+    @PostMapping(value = "/login")
     Object login(@RequestBody UserDTO userDTO, HttpServletResponse response);
 
     /**
      * 获取信息
      *
-     * @param token token
      * @return 结果
      */
     @UserLoginToken
-    @ApiOperation(value = "获取信息")
-    @GetMapping(value = "/auth/info")
-    Object getInfo(String token);
+    @GetMapping(value = "/info")
+    Object getInfo();
 
 }

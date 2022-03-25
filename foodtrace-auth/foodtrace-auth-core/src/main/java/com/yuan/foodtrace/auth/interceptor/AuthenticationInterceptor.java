@@ -8,7 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.yuan.foodtrace.auth.annotation.PassToken;
 import com.yuan.foodtrace.auth.annotation.UserLoginToken;
 import com.yuan.foodtrace.auth.dto.UserDTO;
-import com.yuan.foodtrace.auth.service.impl.UserService;
+import com.yuan.foodtrace.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -54,9 +54,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new RuntimeException("无Token，请重新登录");
                 }
                 // 获取token中的uer id
-                String userId;
+                Long userId;
                 try {
-                    userId = JWT.decode(token).getAudience().get(0);
+                    userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
                 } catch (JWTDecodeException jwtD) {
                     throw new RuntimeException("401");
                 }
@@ -78,8 +78,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {}
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {}
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    }
 }
