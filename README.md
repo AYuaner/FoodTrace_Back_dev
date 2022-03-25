@@ -5,8 +5,6 @@
 
 <p>
   <h1 align="center">
-    <img src="https://raw.githubusercontent.com/murphysec/murphysec/cli-for-saas-1.1.0/logo.png" alt="murphysec" width="150">
-    <br>
     <a href="https://murphysec.com" target="_blank">murphysec</a>
   </h1>
 
