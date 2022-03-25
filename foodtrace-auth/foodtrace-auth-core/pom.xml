@@ -44,13 +44,6 @@
             <version>${jwt.version}</version>
         </dependency>
 
-        <!--fastJson-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-
         <!--MyBatis-->
         <dependency>
             <groupId>org.mybatis.dynamic-sql</groupId>

@@ -75,6 +75,13 @@
             <version>${commons.lang.version}</version>
         </dependency>
 
+        <!--fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
         <!--mysql Driver-->
         <dependency>
             <groupId>mysql</groupId>

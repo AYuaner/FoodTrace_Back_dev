@@ -2,8 +2,6 @@ package com.yuan.foodtrace.auth.dto;
 
 import com.yuan.foodtrace.auth.entity.UserRecord;
 
-import javax.annotation.Generated;
-
 public class UserDTO {
 
     private Long id;
