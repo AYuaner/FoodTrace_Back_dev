@@ -1,12 +1,15 @@
 package com.yuan.foodtrace.fabric.mapper;
 
 import com.alibaba.fastjson.JSON;
+import com.yuan.foodtrace.fabric.entity.SeedInfo;
 import com.yuan.foodtrace.fabric.entity.Transportation;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransportationMapper {
 
@@ -43,6 +46,20 @@ public class TransportationMapper {
             return false;
         }
         // 若Result有返回值，则表示智能合约返回错误，插入失败，返回false
-        return insertResult.length != 0;
+        return insertResult.length == 0;
+    }
+
+    public List<Transportation> queryAll() {
+        byte[] result = new byte[0];
+        try {
+            result = contract.evaluateTransaction("QueryAll");
+
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        String resultStr = new String(result, StandardCharsets.UTF_8);
+        List<Transportation> transportations = JSON.parseArray(resultStr, Transportation.class);
+        return transportations == null ? new ArrayList<>() : transportations;
     }
 }

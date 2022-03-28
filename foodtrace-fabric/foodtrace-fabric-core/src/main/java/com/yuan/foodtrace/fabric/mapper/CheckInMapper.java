@@ -2,11 +2,14 @@ package com.yuan.foodtrace.fabric.mapper;
 
 import com.alibaba.fastjson.JSON;
 import com.yuan.foodtrace.fabric.entity.CheckIn;
+import com.yuan.foodtrace.fabric.entity.SeedInfo;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class CheckInMapper {
@@ -40,6 +43,20 @@ public class CheckInMapper {
             e.printStackTrace();
             return false;
         }
-        return insertResult.length != 0;
+        return insertResult.length == 0;
+    }
+
+    public List<CheckIn> queryAll() {
+        byte[] result = new byte[0];
+        try {
+            result = contract.evaluateTransaction("QueryAll");
+
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        String resultStr = new String(result, StandardCharsets.UTF_8);
+        List<CheckIn> checkIns = JSON.parseArray(resultStr, CheckIn.class);
+        return checkIns == null ? new ArrayList<>() : checkIns;
     }
 }

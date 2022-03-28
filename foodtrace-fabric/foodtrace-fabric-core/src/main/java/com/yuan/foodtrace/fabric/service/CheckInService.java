@@ -1,8 +1,13 @@
 package com.yuan.foodtrace.fabric.service;
 
 import com.yuan.foodtrace.fabric.entity.CheckIn;
+import com.yuan.foodtrace.fabric.entity.SeedInfo;
 import com.yuan.foodtrace.fabric.mapper.CheckInMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CheckInService {
@@ -17,8 +22,15 @@ public class CheckInService {
     public boolean insert(CheckIn info) {
         CheckIn infoById = queryById(info.getCropsId());
         if (infoById.getCropsId() == null) {
+            LocalDateTime time = LocalDateTime.now();
+            info.setCreatedTime(time.toString());
             return mapper.insert(info);
         }
         return false;
+    }
+
+    public List<CheckIn> queryAll() {
+        List<CheckIn> checkIns = mapper.queryAll();
+        return checkIns == null ? new ArrayList<>() : checkIns;
     }
 }

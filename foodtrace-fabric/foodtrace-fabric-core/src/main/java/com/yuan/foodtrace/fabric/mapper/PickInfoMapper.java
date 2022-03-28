@@ -7,6 +7,8 @@ import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PickInfoMapper {
 
@@ -38,6 +40,20 @@ public class PickInfoMapper {
             e.printStackTrace();
             return false;
         }
-        return insertResult.length != 0;
+        return insertResult.length == 0;
+    }
+
+    public List<PickInfo> queryAll() {
+        byte[] result = new byte[0];
+        try {
+            result = contract.evaluateTransaction("QueryAll");
+
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        String resultStr = new String(result, StandardCharsets.UTF_8);
+        List<PickInfo> pickInfos = JSON.parseArray(resultStr, PickInfo.class);
+        return pickInfos == null ? new ArrayList<>() : pickInfos;
     }
 }
