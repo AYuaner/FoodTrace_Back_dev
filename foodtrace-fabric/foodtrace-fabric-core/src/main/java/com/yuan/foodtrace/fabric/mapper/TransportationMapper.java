@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TransportationMapper {
 
-    private final Contract contract = FabricUtils.getContract("SeedInfo");
+    private final Contract contract = FabricUtils.getContract("Transportation");
 
     public Transportation queryByPrimaryKey(String cropsId) {
         byte[] queryResult = new byte[0];
