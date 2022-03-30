@@ -1,7 +1,11 @@
 package com.yuan.foodtrace.auth.utils;
 
+import com.yuan.foodtrace.auth.dto.FarmDTO;
+import com.yuan.foodtrace.auth.dto.WorkerDTO;
+import com.yuan.foodtrace.auth.entity.FarmRecord;
 import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.entity.WorkerRecord;
 
 import java.util.Objects;
 
@@ -34,5 +38,53 @@ public class MapperUtils {
             userRecord.setEnable(userDTO.getEnable());
         }
         return userRecord;
+    }
+
+    public static FarmDTO FarmEntityToDTO(FarmRecord entity) {
+        FarmDTO dto = new FarmDTO();
+        if (!Objects.isNull(entity)) {
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setCompany(entity.getCompany());
+            dto.setLocation(entity.getLocation());
+        }
+        return dto;
+    }
+
+    public static FarmRecord FarmDTOToEntity(FarmDTO dto) {
+        FarmRecord entity = new FarmRecord();
+        if (!Objects.isNull(dto)) {
+            entity.setId(dto.getId());
+            entity.setName(dto.getName());
+            entity.setCompany(dto.getCompany());
+            entity.setLocation(dto.getLocation());
+        }
+        return entity;
+    }
+
+    public static WorkerDTO WorkerEntityToDTO(WorkerRecord entity) {
+        WorkerDTO dto = new WorkerDTO();
+        if (!Objects.isNull(entity)) {
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setIdNumber(entity.getIdNumber());
+            dto.setPhoneNumber(entity.getPhoneNumber());
+            dto.setAge(entity.getAge());
+            dto.setGender(entity.getGender());
+        }
+        return dto;
+    }
+
+    public static WorkerRecord WorkerDTOToEntity(WorkerDTO dto) {
+        WorkerRecord entity = new WorkerRecord();
+        if (!Objects.isNull(entity)) {
+            entity.setId(dto.getId());
+            entity.setName(dto.getName());
+            entity.setIdNumber(dto.getIdNumber());
+            entity.setPhoneNumber(dto.getPhoneNumber());
+            entity.setAge(dto.getAge());
+            entity.setGender(dto.getGender());
+        }
+        return entity;
     }
 }

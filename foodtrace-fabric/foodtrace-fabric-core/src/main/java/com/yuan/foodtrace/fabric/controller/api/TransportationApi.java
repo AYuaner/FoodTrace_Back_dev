@@ -1,12 +1,10 @@
 package com.yuan.foodtrace.fabric.controller.api;
 
 import com.yuan.foodtrace.fabric.entity.Transportation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "transportation")
+@CrossOrigin
 public interface TransportationApi {
 
     @GetMapping
