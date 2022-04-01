@@ -61,6 +61,7 @@ public class FabricUtils {
                 .identity(wallet, "user1")
                 .networkConfig(Paths.get("foodtrace-fabric/foodtrace-fabric-core/src/main/resources/networkConnect.json"));
         Gateway gateway = builder.connect();
+        System.out.println(gateway);
         log.info(gateway);
 
         return gateway.getNetwork("mychannel");
