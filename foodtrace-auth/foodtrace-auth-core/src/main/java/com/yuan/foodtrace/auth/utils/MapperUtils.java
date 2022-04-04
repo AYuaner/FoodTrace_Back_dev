@@ -1,10 +1,12 @@
 package com.yuan.foodtrace.auth.utils;
 
 import com.yuan.foodtrace.auth.dto.FarmDTO;
+import com.yuan.foodtrace.auth.dto.VehicleDTO;
 import com.yuan.foodtrace.auth.dto.WorkerDTO;
 import com.yuan.foodtrace.auth.entity.FarmRecord;
 import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.entity.VehicleRecord;
 import com.yuan.foodtrace.auth.entity.WorkerRecord;
 
 import java.util.Objects;
@@ -84,6 +86,30 @@ public class MapperUtils {
             entity.setPhoneNumber(dto.getPhoneNumber());
             entity.setAge(dto.getAge());
             entity.setGender(dto.getGender());
+        }
+        return entity;
+    }
+
+    public static VehicleDTO VehicleEntityToDTO(VehicleDTO entity) {
+        VehicleDTO dto = new VehicleDTO();
+        if (!Objects.isNull(entity)) {
+            dto.setId(entity.getId());
+            dto.setBrand(entity.getBrand());
+            dto.setType(entity.getType());
+            dto.setBuyYear(entity.getBuyYear());
+            dto.setLicense(entity.getLicense());
+        }
+        return dto;
+    }
+
+    public static VehicleRecord VehicleDTOToEntity(VehicleDTO dto) {
+        VehicleRecord entity = new VehicleRecord();
+        if (!Objects.isNull(entity)) {
+            entity.setId(dto.getId());
+            entity.setBrand(dto.getBrand());
+            entity.setType(dto.getType());
+            entity.setBuyYear(dto.getBuyYear());
+            entity.setLicense(dto.getLicense());
         }
         return entity;
     }

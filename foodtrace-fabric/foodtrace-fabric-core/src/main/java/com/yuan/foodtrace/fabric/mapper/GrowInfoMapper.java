@@ -28,6 +28,7 @@ public class GrowInfoMapper {
     }
 
     public boolean insert(GrowInfo info) {
+        System.out.println(info);
         byte[] insertResult = new byte[0];
         try {
             insertResult = contract.createTransaction("InsertGrowInfo")

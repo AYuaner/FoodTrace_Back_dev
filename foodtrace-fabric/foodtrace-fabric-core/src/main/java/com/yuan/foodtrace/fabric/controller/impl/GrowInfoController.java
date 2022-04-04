@@ -62,7 +62,7 @@ public class GrowInfoController implements GrowInfoApi {
         boolean result = service.insert(info);
         jsonObject = new JSONObject();
         jsonObject.put("result", result);
-        return null;
+        return jsonObject;
     }
 
     @Override
