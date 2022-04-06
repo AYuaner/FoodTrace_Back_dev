@@ -60,4 +60,17 @@ public class GrowInfoMapper {
         List<GrowInfo> growInfos = JSON.parseArray(resultStr, GrowInfo.class);
         return growInfos == null ? new ArrayList<>() : growInfos;
     }
+
+    public List<GrowInfo> queryByCropsId(String cropsId) {
+        byte[] result = new byte[0];
+        try {
+            result = contract.evaluateTransaction("QueryGrowInfoByCropsId", cropsId);
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        String resultStr = new String(result, StandardCharsets.UTF_8);
+        List<GrowInfo> growInfos = JSON.parseArray(resultStr, GrowInfo.class);
+        return growInfos == null ? new ArrayList<>() : growInfos;
+    }
 }

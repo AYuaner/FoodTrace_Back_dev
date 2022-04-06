@@ -32,4 +32,9 @@ public class GrowInfoService {
         List<GrowInfo> growInfos = mapper.queryAll();
         return growInfos == null ? new ArrayList<>() : growInfos;
     }
+
+    public List<GrowInfo> queryByCropsId(String cropsId) {
+        List<GrowInfo> growInfos = mapper.queryByCropsId(cropsId);
+        return growInfos == null ? new ArrayList<>() : growInfos;
+    }
 }

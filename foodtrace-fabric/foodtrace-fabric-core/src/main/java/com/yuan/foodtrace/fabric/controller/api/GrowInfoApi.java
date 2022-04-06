@@ -15,4 +15,7 @@ public interface GrowInfoApi {
 
     @GetMapping(value = "/all")
     Object findAll();
+
+    @GetMapping(value = "/byCropsId")
+    Object findByCropsId(String cropsId);
 }

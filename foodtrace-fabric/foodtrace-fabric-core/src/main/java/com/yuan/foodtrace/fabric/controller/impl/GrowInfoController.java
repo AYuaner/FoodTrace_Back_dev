@@ -26,8 +26,9 @@ public class GrowInfoController implements GrowInfoApi {
         if (StringUtils.isEmpty(opId)) {
             return returnNull("`opId` is empty");
         }
-        GrowInfo growInfo = service.queryByOperaId(opId);
         jsonObject = new JSONObject();
+        GrowInfo growInfo = service.queryByOperaId(opId);
+        System.out.println(growInfo);
         jsonObject.put("result", growInfo);
         return jsonObject;
     }
@@ -68,6 +69,14 @@ public class GrowInfoController implements GrowInfoApi {
     @Override
     public Object findAll() {
         List<GrowInfo> result = service.queryAll();
+        jsonObject = new JSONObject();
+        jsonObject.put("result", result);
+        return jsonObject;
+    }
+
+    @Override
+    public Object findByCropsId(String cropsId) {
+        List<GrowInfo> result = service.queryByCropsId(cropsId);
         jsonObject = new JSONObject();
         jsonObject.put("result", result);
         return jsonObject;
