@@ -30,12 +30,11 @@ public class AccountController implements AccountApi {
 
     @Override
     public Object deleteAccount(UserDTO userDTO) {
-        System.out.println(userDTO);
         JSONObject jsonObject = new JSONObject();
         UserDTO DTO = new UserDTO();
-        userDTO.setId(userDTO.getId());
-        userDTO.setEnable(userDTO.getEnable());
-        Boolean result = accountService.delete(userDTO);
+        DTO.setId(userDTO.getId());
+        DTO.setEnable(userDTO.getEnable());
+        Boolean result = accountService.delete(DTO);
         jsonObject.put("result", result);
         return jsonObject;
     }
