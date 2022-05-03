@@ -1,8 +1,12 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.controller.api.AccountApi;
-import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.domain.command.AccountDeleteCommand;
+import com.yuan.foodtrace.auth.domain.command.AccountInsertCommand;
+import com.yuan.foodtrace.auth.domain.command.AccountUpdateCommand;
+import com.yuan.foodtrace.auth.domain.request.AccountDeleteRequest;
+import com.yuan.foodtrace.auth.domain.request.AccountInsertRequest;
+import com.yuan.foodtrace.auth.domain.request.AccountUpdateRequest;
 import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.service.AccountService;
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static com.yuan.foodtrace.auth.utils.ReturnUtils.*;
 
 /**
  * @author A_Yuan
@@ -22,55 +28,62 @@ public class AccountController implements AccountApi {
 
     @Override
     public Object listAccount() {
-        JSONObject jsonObject = new JSONObject();
-        List<UserRecord> list = accountService.list();
-        jsonObject.put("accounts", list);
-        return jsonObject;
+        List<UserRecord> accountList = accountService.list();
+        return returnListData(accountList);
     }
 
     @Override
-    public Object deleteAccount(UserDTO userDTO) {
-        JSONObject jsonObject = new JSONObject();
-        UserDTO DTO = new UserDTO();
-        DTO.setId(userDTO.getId());
-        DTO.setEnable(userDTO.getEnable());
-        Boolean result = accountService.delete(DTO);
-        jsonObject.put("result", result);
-        return jsonObject;
+    public Object deleteAccount(AccountDeleteRequest request) {
+        AccountDeleteCommand command = new AccountDeleteCommand(request.getId(), request.getUsername(), request.isEnable());
+        if (!accountService.delete(command)) {
+            returnFalseResultWithReason("Delete Fail.");
+        }
+        return returnTrueResult();
     }
 
     @Override
-    public Object newAccount(UserDTO userDTO) {
-        JSONObject jsonObject = new JSONObject();
-        UserDTO dto = new UserDTO();
-        dto.setUsername(userDTO.getUsername().replaceAll("\\W", ""));
-        dto.setPassword(userDTO.getPassword().replaceAll("\\W", ""));
-        dto.setRole(userDTO.getRole().replaceAll("\\W", ""));
-
-        if (StringUtils.isEmpty(dto.getUsername())) {
-            jsonObject.put("result", false);
-            return jsonObject;
+    public Object newAccount(AccountInsertRequest request) {
+        if (StringUtils.isEmpty(request.getUsername())) {
+            return returnFalseResultWithReason("`Username` is Empty.");
         }
-        if (StringUtils.isEmpty(dto.getPassword())) {
-            jsonObject.put("result", false);
-            return jsonObject;
+        if (StringUtils.isEmpty(request.getPassword())) {
+            return returnFalseResultWithReason("`Password` is Empty.");
         }
-        if (StringUtils.isEmpty(dto.getRole())) {
-            jsonObject.put("result", false);
-            return jsonObject;
+        if (StringUtils.isEmpty(request.getRole())) {
+            return returnFalseResultWithReason("`Role` is Empty.");
+        }
+        if (StringUtils.isEmpty(request.getCompany())) {
+            return returnFalseResultWithReason("`Company` is Empty.");
         }
 
-        Boolean result = accountService.insert(dto);
-        jsonObject.put("result", result);
-        return jsonObject;
+        AccountInsertCommand command = new AccountInsertCommand(
+                request.getUsername(),
+                request.getPassword(),
+                request.getRole(),
+                request.getCompany());
+
+        if (!accountService.insert(command)) {
+            return returnFalseResultWithReason("Insert Fail.");
+        }
+        return returnTrueResult();
     }
 
     @Override
-    public Object updateAccount(UserDTO userDTO) {
-        JSONObject jsonObject = new JSONObject();
-        assert userDTO.getId() != null;
-        Boolean result = accountService.update(userDTO);
-        jsonObject.put("result", result);
-        return jsonObject;
+    public Object updateAccount(AccountUpdateRequest request) {
+        if (request.getId() == null) {
+            return returnFalseResultWithReason("`Id` is Empty.");
+        }
+        AccountUpdateCommand command = new AccountUpdateCommand(
+                request.getId(),
+                request.getUsername(),
+                request.getPassword(),
+                request.getRole(),
+                request.getCompany());
+
+        if (!accountService.update(command)) {
+            return returnFalseResultWithReason("Update Fail.");
+        }
+        return returnTrueResult();
     }
+
 }

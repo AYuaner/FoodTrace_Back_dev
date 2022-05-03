@@ -44,6 +44,13 @@ public class UserRecord implements Serializable {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
     private Boolean enable;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.company")
+    private String company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     private static final long serialVersionUID = 1L;
 
@@ -97,6 +104,16 @@ public class UserRecord implements Serializable {
         this.enable = enable;
     }
 
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.company")
+    public String getCompany() {
+        return company;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.company")
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     public boolean equals(Object that) {
@@ -114,7 +131,8 @@ public class UserRecord implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
-            && (this.getEnable() == null ? other.getEnable() == null : this.getEnable().equals(other.getEnable()));
+            && (this.getEnable() == null ? other.getEnable() == null : this.getEnable().equals(other.getEnable()))
+            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()));
     }
 
     @Override
@@ -127,6 +145,7 @@ public class UserRecord implements Serializable {
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
         result = prime * result + ((getEnable() == null) ? 0 : getEnable().hashCode());
+        result = prime * result + ((getCompany() == null) ? 0 : getCompany().hashCode());
         return result;
     }
 }

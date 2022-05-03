@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.dto;
+package com.yuan.foodtrace.auth.domain.dto;
 
 import java.io.Serializable;
 

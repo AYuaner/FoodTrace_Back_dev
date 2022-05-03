@@ -35,7 +35,7 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface VehicleBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
-    BasicColumn[] selectList = BasicColumn.columnList(id, brand, type, buyYear, license);
+    BasicColumn[] selectList = BasicColumn.columnList(id, brand, type, buyYear, license, company);
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -65,7 +65,8 @@ public interface VehicleBaseMapper {
         @Result(column="brand", property="brand", jdbcType=JdbcType.VARCHAR),
         @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
         @Result(column="buy_year", property="buyYear", jdbcType=JdbcType.VARCHAR),
-        @Result(column="license", property="license", jdbcType=JdbcType.VARCHAR)
+        @Result(column="license", property="license", jdbcType=JdbcType.VARCHAR),
+        @Result(column="company", property="company", jdbcType=JdbcType.VARCHAR)
     })
     List<VehicleRecord> selectMany(SelectStatementProvider selectStatement);
 
@@ -98,6 +99,7 @@ public interface VehicleBaseMapper {
             .map(type).toProperty("type")
             .map(buyYear).toProperty("buyYear")
             .map(license).toProperty("license")
+            .map(company).toProperty("company")
         );
     }
 
@@ -109,6 +111,7 @@ public interface VehicleBaseMapper {
             .map(type).toProperty("type")
             .map(buyYear).toProperty("buyYear")
             .map(license).toProperty("license")
+            .map(company).toProperty("company")
         );
     }
 
@@ -120,6 +123,7 @@ public interface VehicleBaseMapper {
             .map(type).toPropertyWhenPresent("type", record::getType)
             .map(buyYear).toPropertyWhenPresent("buyYear", record::getBuyYear)
             .map(license).toPropertyWhenPresent("license", record::getLicense)
+            .map(company).toPropertyWhenPresent("company", record::getCompany)
         );
     }
 
@@ -156,7 +160,8 @@ public interface VehicleBaseMapper {
                 .set(brand).equalTo(record::getBrand)
                 .set(type).equalTo(record::getType)
                 .set(buyYear).equalTo(record::getBuyYear)
-                .set(license).equalTo(record::getLicense);
+                .set(license).equalTo(record::getLicense)
+                .set(company).equalTo(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
@@ -165,7 +170,8 @@ public interface VehicleBaseMapper {
                 .set(brand).equalToWhenPresent(record::getBrand)
                 .set(type).equalToWhenPresent(record::getType)
                 .set(buyYear).equalToWhenPresent(record::getBuyYear)
-                .set(license).equalToWhenPresent(record::getLicense);
+                .set(license).equalToWhenPresent(record::getLicense)
+                .set(company).equalToWhenPresent(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
@@ -175,6 +181,7 @@ public interface VehicleBaseMapper {
             .set(type).equalTo(record::getType)
             .set(buyYear).equalTo(record::getBuyYear)
             .set(license).equalTo(record::getLicense)
+            .set(company).equalTo(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }
@@ -186,6 +193,7 @@ public interface VehicleBaseMapper {
             .set(type).equalToWhenPresent(record::getType)
             .set(buyYear).equalToWhenPresent(record::getBuyYear)
             .set(license).equalToWhenPresent(record::getLicense)
+            .set(company).equalToWhenPresent(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }

@@ -1,11 +1,11 @@
 package com.yuan.foodtrace.auth.utils;
 
-import com.yuan.foodtrace.auth.dto.FarmDTO;
-import com.yuan.foodtrace.auth.dto.VehicleDTO;
-import com.yuan.foodtrace.auth.dto.WorkerDTO;
+import com.yuan.foodtrace.auth.domain.dto.FarmDTO;
+import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
+import com.yuan.foodtrace.auth.domain.dto.WorkerDTO;
+import com.yuan.foodtrace.auth.domain.dto.UserDTO;
 import com.yuan.foodtrace.auth.entity.FarmRecord;
 import com.yuan.foodtrace.auth.entity.UserRecord;
-import com.yuan.foodtrace.auth.dto.UserDTO;
 import com.yuan.foodtrace.auth.entity.VehicleRecord;
 import com.yuan.foodtrace.auth.entity.WorkerRecord;
 
@@ -26,6 +26,7 @@ public class MapperUtils {
             userDTO.setPassword(userRecord.getPassword());
             userDTO.setRole(userRecord.getRole());
             userDTO.setEnable(userRecord.getEnable());
+            userDTO.setCompany(userRecord.getCompany());
         }
         return userDTO;
     }
@@ -38,6 +39,7 @@ public class MapperUtils {
             userRecord.setPassword(userDTO.getPassword());
             userRecord.setRole(userDTO.getRole());
             userRecord.setEnable(userDTO.getEnable());
+            userRecord.setCompany(userDTO.getCompany());
         }
         return userRecord;
     }
@@ -73,6 +75,7 @@ public class MapperUtils {
             dto.setPhoneNumber(entity.getPhoneNumber());
             dto.setAge(entity.getAge());
             dto.setGender(entity.getGender());
+            dto.setCompany(entity.getCompany());
         }
         return dto;
     }
@@ -86,6 +89,7 @@ public class MapperUtils {
             entity.setPhoneNumber(dto.getPhoneNumber());
             entity.setAge(dto.getAge());
             entity.setGender(dto.getGender());
+            entity.setCompany(dto.getCompany());
         }
         return entity;
     }
@@ -98,6 +102,7 @@ public class MapperUtils {
             dto.setType(entity.getType());
             dto.setBuyYear(entity.getBuyYear());
             dto.setLicense(entity.getLicense());
+            dto.setCompany(dto.getCompany());
         }
         return dto;
     }
@@ -110,6 +115,7 @@ public class MapperUtils {
             entity.setType(dto.getType());
             entity.setBuyYear(dto.getBuyYear());
             entity.setLicense(dto.getLicense());
+            entity.setCompany(dto.getCompany());
         }
         return entity;
     }

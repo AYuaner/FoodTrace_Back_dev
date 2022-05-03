@@ -35,7 +35,7 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface UserBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
-    BasicColumn[] selectList = BasicColumn.columnList(id, username, password, role, enable);
+    BasicColumn[] selectList = BasicColumn.columnList(id, username, password, role, enable, company);
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -65,7 +65,8 @@ public interface UserBaseMapper {
         @Result(column="userName", property="username", jdbcType=JdbcType.VARCHAR),
         @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
         @Result(column="role", property="role", jdbcType=JdbcType.VARCHAR),
-        @Result(column="enable", property="enable", jdbcType=JdbcType.BIT)
+        @Result(column="enable", property="enable", jdbcType=JdbcType.BIT),
+        @Result(column="company", property="company", jdbcType=JdbcType.VARCHAR)
     })
     List<UserRecord> selectMany(SelectStatementProvider selectStatement);
 
@@ -98,6 +99,7 @@ public interface UserBaseMapper {
             .map(password).toProperty("password")
             .map(role).toProperty("role")
             .map(enable).toProperty("enable")
+            .map(company).toProperty("company")
         );
     }
 
@@ -109,6 +111,7 @@ public interface UserBaseMapper {
             .map(password).toProperty("password")
             .map(role).toProperty("role")
             .map(enable).toProperty("enable")
+            .map(company).toProperty("company")
         );
     }
 
@@ -120,6 +123,7 @@ public interface UserBaseMapper {
             .map(password).toPropertyWhenPresent("password", record::getPassword)
             .map(role).toPropertyWhenPresent("role", record::getRole)
             .map(enable).toPropertyWhenPresent("enable", record::getEnable)
+            .map(company).toPropertyWhenPresent("company", record::getCompany)
         );
     }
 
@@ -156,7 +160,8 @@ public interface UserBaseMapper {
                 .set(username).equalTo(record::getUsername)
                 .set(password).equalTo(record::getPassword)
                 .set(role).equalTo(record::getRole)
-                .set(enable).equalTo(record::getEnable);
+                .set(enable).equalTo(record::getEnable)
+                .set(company).equalTo(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
@@ -165,7 +170,8 @@ public interface UserBaseMapper {
                 .set(username).equalToWhenPresent(record::getUsername)
                 .set(password).equalToWhenPresent(record::getPassword)
                 .set(role).equalToWhenPresent(record::getRole)
-                .set(enable).equalToWhenPresent(record::getEnable);
+                .set(enable).equalToWhenPresent(record::getEnable)
+                .set(company).equalToWhenPresent(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
@@ -175,6 +181,7 @@ public interface UserBaseMapper {
             .set(password).equalTo(record::getPassword)
             .set(role).equalTo(record::getRole)
             .set(enable).equalTo(record::getEnable)
+            .set(company).equalTo(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }
@@ -186,6 +193,7 @@ public interface UserBaseMapper {
             .set(password).equalToWhenPresent(record::getPassword)
             .set(role).equalToWhenPresent(record::getRole)
             .set(enable).equalToWhenPresent(record::getEnable)
+            .set(company).equalToWhenPresent(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }

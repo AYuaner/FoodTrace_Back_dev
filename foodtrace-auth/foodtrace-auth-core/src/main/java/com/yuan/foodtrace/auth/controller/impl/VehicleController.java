@@ -2,8 +2,7 @@ package com.yuan.foodtrace.auth.controller.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.controller.api.VehicleApi;
-import com.yuan.foodtrace.auth.dto.VehicleDTO;
-import com.yuan.foodtrace.auth.entity.VehicleRecord;
+import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
 import com.yuan.foodtrace.auth.service.VehicleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

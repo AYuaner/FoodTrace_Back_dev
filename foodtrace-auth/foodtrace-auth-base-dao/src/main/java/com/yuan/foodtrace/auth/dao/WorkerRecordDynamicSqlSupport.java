@@ -51,6 +51,13 @@ public final class WorkerRecordDynamicSqlSupport {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.gender")
     public static final SqlColumn<Boolean> gender = workerRecord.gender;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.company")
+    public static final SqlColumn<String> company = workerRecord.company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     public static final class WorkerRecord extends SqlTable {
         public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
@@ -64,6 +71,8 @@ public final class WorkerRecordDynamicSqlSupport {
         public final SqlColumn<Integer> age = column("age", JDBCType.INTEGER);
 
         public final SqlColumn<Boolean> gender = column("gender", JDBCType.BIT);
+
+        public final SqlColumn<String> company = column("company", JDBCType.VARCHAR);
 
         public WorkerRecord() {
             super("worker");

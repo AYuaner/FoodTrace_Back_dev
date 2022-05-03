@@ -1,8 +1,6 @@
 package com.yuan.foodtrace.auth.service;
 
-import com.yuan.foodtrace.auth.dto.VehicleDTO;
-import com.yuan.foodtrace.auth.dto.WorkerDTO;
-import com.yuan.foodtrace.auth.entity.VehicleRecord;
+import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
 import com.yuan.foodtrace.auth.mapper.VehicleMapper;
 import com.yuan.foodtrace.auth.utils.MapperUtils;
 import org.apache.commons.lang.StringUtils;

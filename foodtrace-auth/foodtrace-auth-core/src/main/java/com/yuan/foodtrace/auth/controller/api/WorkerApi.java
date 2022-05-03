@@ -1,6 +1,6 @@
 package com.yuan.foodtrace.auth.controller.api;
 
-import com.yuan.foodtrace.auth.dto.WorkerDTO;
+import com.yuan.foodtrace.auth.domain.dto.WorkerDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/worker")

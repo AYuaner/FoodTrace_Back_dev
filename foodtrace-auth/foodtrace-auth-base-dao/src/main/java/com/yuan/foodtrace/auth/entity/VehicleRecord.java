@@ -44,6 +44,13 @@ public class VehicleRecord implements Serializable {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.license")
     private String license;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.company")
+    private String company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     private static final long serialVersionUID = 1L;
 
@@ -97,6 +104,16 @@ public class VehicleRecord implements Serializable {
         this.license = license;
     }
 
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.company")
+    public String getCompany() {
+        return company;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.company")
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     public boolean equals(Object that) {
@@ -114,7 +131,8 @@ public class VehicleRecord implements Serializable {
             && (this.getBrand() == null ? other.getBrand() == null : this.getBrand().equals(other.getBrand()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getBuyYear() == null ? other.getBuyYear() == null : this.getBuyYear().equals(other.getBuyYear()))
-            && (this.getLicense() == null ? other.getLicense() == null : this.getLicense().equals(other.getLicense()));
+            && (this.getLicense() == null ? other.getLicense() == null : this.getLicense().equals(other.getLicense()))
+            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()));
     }
 
     @Override
@@ -127,6 +145,7 @@ public class VehicleRecord implements Serializable {
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getBuyYear() == null) ? 0 : getBuyYear().hashCode());
         result = prime * result + ((getLicense() == null) ? 0 : getLicense().hashCode());
+        result = prime * result + ((getCompany() == null) ? 0 : getCompany().hashCode());
         return result;
     }
 }

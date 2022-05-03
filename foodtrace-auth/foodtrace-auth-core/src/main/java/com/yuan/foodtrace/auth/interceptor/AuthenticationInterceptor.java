@@ -5,9 +5,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.yuan.foodtrace.auth.annotation.AdminToken;
 import com.yuan.foodtrace.auth.annotation.PassToken;
 import com.yuan.foodtrace.auth.annotation.UserLoginToken;
-import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.domain.dto.UserDTO;
 import com.yuan.foodtrace.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -49,32 +50,49 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (method.isAnnotationPresent(UserLoginToken.class)) {
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
             if (userLoginToken.required()) {
-                // 执行认证
-                if (token == null) {
-                    throw new RuntimeException("无Token，请重新登录");
-                }
-                // 获取token中的uer id
-                Long userId;
-                try {
-                    userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
-                } catch (JWTDecodeException jwtD) {
-                    throw new RuntimeException("401");
-                }
-                UserDTO userDTO = userService.findUserById(userId);
-                if (userDTO == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
-                }
-                // 验证Token
-                JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userDTO.getPassword())).build();
-                try {
-                    jwtVerifier.verify(token);
-                } catch (JWTVerificationException jwtV) {
-                    throw new RuntimeException("401");
+                checkTokenAndGetUser(token);
+                return true;
+            }
+        }
+        // 检查是否需要admin权限
+        if (method.isAnnotationPresent(AdminToken.class)) {
+            AdminToken adminToken = method.getAnnotation(AdminToken.class);
+            if (adminToken.required()) {
+                UserDTO userDTO = checkTokenAndGetUser(token);
+                if (userDTO.getRole() != "admin") {
+                    throw new RuntimeException("the role is not admin, request fail");
                 }
                 return true;
             }
         }
         return true;
+    }
+
+    private UserDTO checkTokenAndGetUser(String token) {
+        // 执行认证
+        if (token == null) {
+            throw new RuntimeException("`token` is null");
+        }
+        // 获取token中的uer id
+        Long userId;
+        try {
+            userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
+        } catch (JWTDecodeException jwtD) {
+            throw new RuntimeException("jwt decode fail");
+        }
+        UserDTO userDTO = userService.findUserById(userId);
+        if (userDTO == null) {
+            throw new RuntimeException("user not exist");
+        }
+        // 验证Token
+        Algorithm algorithm = Algorithm.HMAC256(userDTO.getPassword());
+        JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+        try {
+            jwtVerifier.verify(token);
+        } catch (JWTVerificationException jwtV) {
+            throw new RuntimeException("jwt verify fail");
+        }
+        return userDTO;
     }
 
     @Override

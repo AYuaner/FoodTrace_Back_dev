@@ -51,6 +51,13 @@ public class WorkerRecord implements Serializable {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.gender")
     private Boolean gender;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.company")
+    private String company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     private static final long serialVersionUID = 1L;
 
@@ -114,6 +121,16 @@ public class WorkerRecord implements Serializable {
         this.gender = gender;
     }
 
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.company")
+    public String getCompany() {
+        return company;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.company")
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     public boolean equals(Object that) {
@@ -132,7 +149,8 @@ public class WorkerRecord implements Serializable {
             && (this.getIdNumber() == null ? other.getIdNumber() == null : this.getIdNumber().equals(other.getIdNumber()))
             && (this.getPhoneNumber() == null ? other.getPhoneNumber() == null : this.getPhoneNumber().equals(other.getPhoneNumber()))
             && (this.getAge() == null ? other.getAge() == null : this.getAge().equals(other.getAge()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()));
+            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
+            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()));
     }
 
     @Override
@@ -146,6 +164,7 @@ public class WorkerRecord implements Serializable {
         result = prime * result + ((getPhoneNumber() == null) ? 0 : getPhoneNumber().hashCode());
         result = prime * result + ((getAge() == null) ? 0 : getAge().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
+        result = prime * result + ((getCompany() == null) ? 0 : getCompany().hashCode());
         return result;
     }
 }
