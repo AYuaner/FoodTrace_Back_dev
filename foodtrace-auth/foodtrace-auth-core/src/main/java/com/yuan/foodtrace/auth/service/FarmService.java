@@ -22,8 +22,17 @@ public class FarmService {
      * @param company the company work at or onw
      * @return list of FarmRecord
      */
-    public List<FarmRecord> list(String company) {
-        return farmMapper.list(company);
+    public List<FarmRecord> listWithCompany(String company) {
+        return farmMapper.listWithCompany(company);
+    }
+
+
+    /**
+     * get list of all farm
+     * @return list of FarmRecord
+     */
+    public List<FarmRecord> list() {
+        return farmMapper.list();
     }
 
     /**
@@ -81,24 +90,24 @@ public class FarmService {
      * to ensure `name` not be used.
      */
     private boolean _validateNameNoUse(String name) {
-        FarmRecord record = farmMapper.findByName(name).orElseThrow(() -> new RuntimeException("该name farm不存在"));
-        return record.getId() != null;
+        FarmRecord record = farmMapper.findByName(name).orElse(new FarmRecord());
+        return record.getId() == null;
     }
 
     /**
      * to ensure operator can only operate the record his company own.
      */
-    private boolean _validateIdAndCompany(String id, String operatorCompany) {
-        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElseThrow(() -> new RuntimeException("该id Farm不存在"));
+    private boolean _validateIdAndCompany(Long id, String operatorCompany) {
+        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElse(new FarmRecord());
         return StringUtils.equals(record.getCompany(), operatorCompany)
-                || "admin".equalsIgnoreCase(record.getCompany());
+                || "admin".equalsIgnoreCase(operatorCompany);
     }
 
     /**
      * to ensure `id` and `name` can match.
      */
-    private boolean _validateIdAndName(String id, String name) {
-        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElseThrow(() -> new RuntimeException("该idFarm不存在"));
+    private boolean _validateIdAndName(Long id, String name) {
+        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElse(new FarmRecord());
         return StringUtils.equals(record.getName(), name);
     }
 }

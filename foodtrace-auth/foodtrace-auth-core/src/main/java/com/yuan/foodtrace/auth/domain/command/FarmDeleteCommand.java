@@ -2,17 +2,17 @@ package com.yuan.foodtrace.auth.domain.command;
 
 public class FarmDeleteCommand {
 
-    private String id;
+    private Long id;
     private String name;
     private String company;
 
-    public FarmDeleteCommand(String id, String name, String company) {
+    public FarmDeleteCommand(Long id, String name, String company) {
         this.id = id;
         this.name = name;
         this.company = company;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

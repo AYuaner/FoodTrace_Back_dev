@@ -28,7 +28,12 @@ public class FarmController implements FarmApi {
     @Override
     public Object listFarm() {
         String company = TokenUtils.getCompany();
-        List<FarmRecord> farmList = farmService.list(company);
+        List<FarmRecord> farmList;
+        if ("admin".equalsIgnoreCase(company)) {
+            farmList = farmService.list();
+        } else {
+            farmList = farmService.listWithCompany(company);
+        }
         return returnListData(farmList);
     }
 
@@ -60,7 +65,7 @@ public class FarmController implements FarmApi {
 
     @Override
     public Object deleteFarm(FarmDeleteRequest request) {
-        if (StringUtils.isEmpty(request.getId())) {
+        if (request.getId()==null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
         if (StringUtils.isEmpty(request.getName())) {
@@ -80,7 +85,7 @@ public class FarmController implements FarmApi {
 
     @Override
     public Object updateFarm(FarmUpdateRequest request) {
-        if (StringUtils.isEmpty(request.getId())) {
+        if (request.getId()==null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
 

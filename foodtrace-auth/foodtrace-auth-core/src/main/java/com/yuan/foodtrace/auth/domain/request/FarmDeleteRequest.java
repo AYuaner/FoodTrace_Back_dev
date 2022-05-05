@@ -2,10 +2,10 @@ package com.yuan.foodtrace.auth.domain.request;
 
 public class FarmDeleteRequest {
 
-    private String id;
+    private Long id;
     private String name;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

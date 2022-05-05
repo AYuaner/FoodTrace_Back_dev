@@ -2,12 +2,12 @@ package com.yuan.foodtrace.auth.domain.request;
 
 public class FarmUpdateRequest {
 
-    private String id;
+    private Long id;
     private String name;
     private String company;
     private String location;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
