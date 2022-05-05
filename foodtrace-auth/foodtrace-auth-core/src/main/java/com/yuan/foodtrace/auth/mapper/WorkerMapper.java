@@ -1,5 +1,7 @@
 package com.yuan.foodtrace.auth.mapper;
 
+import com.yuan.foodtrace.auth.dao.WorkerBaseMapper;
+import com.yuan.foodtrace.auth.entity.WorkerRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

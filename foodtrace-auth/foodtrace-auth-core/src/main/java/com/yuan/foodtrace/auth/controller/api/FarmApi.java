@@ -1,6 +1,8 @@
 package com.yuan.foodtrace.auth.controller.api;
 
-import com.yuan.foodtrace.auth.domain.dto.FarmDTO;
+import com.yuan.foodtrace.auth.domain.request.FarmDeleteRequest;
+import com.yuan.foodtrace.auth.domain.request.FarmInsertRequest;
+import com.yuan.foodtrace.auth.domain.request.FarmUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/farm")
@@ -11,14 +13,12 @@ public interface FarmApi {
     Object listFarm();
 
     @PostMapping()
-    Object newFarm(@RequestBody FarmDTO dto);
+    Object newFarm(@RequestBody FarmInsertRequest request);
 
     @DeleteMapping(value = "/{id}")
-    Object deleteFarm(@RequestBody FarmDTO dto);
+    Object deleteFarm(@RequestBody FarmDeleteRequest request);
 
     @PutMapping(value = "/{id}")
-    Object updateFarm(@RequestBody FarmDTO dto);
+    Object updateFarm(@RequestBody FarmUpdateRequest request);
 
-    @GetMapping()
-    Object findOne(String id);
 }

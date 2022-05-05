@@ -36,7 +36,7 @@ public class AccountController implements AccountApi {
     public Object deleteAccount(AccountDeleteRequest request) {
         AccountDeleteCommand command = new AccountDeleteCommand(request.getId(), request.getUsername(), request.isEnable());
         if (!accountService.delete(command)) {
-            returnFalseResultWithReason("Delete Fail.");
+            return returnFailWithNoReason(OperateType.DELETE);
         }
         return returnTrueResult();
     }
@@ -63,7 +63,7 @@ public class AccountController implements AccountApi {
                 request.getCompany());
 
         if (!accountService.insert(command)) {
-            return returnFalseResultWithReason("Insert Fail.");
+            return returnFailWithNoReason(OperateType.INSERT);
         }
         return returnTrueResult();
     }
@@ -81,7 +81,7 @@ public class AccountController implements AccountApi {
                 request.getCompany());
 
         if (!accountService.update(command)) {
-            return returnFalseResultWithReason("Update Fail.");
+            return returnFailWithNoReason(OperateType.UPDATE);
         }
         return returnTrueResult();
     }

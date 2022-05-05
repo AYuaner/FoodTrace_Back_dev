@@ -1,6 +1,8 @@
 package com.yuan.foodtrace.auth.controller.api;
 
-import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
+import com.yuan.foodtrace.auth.domain.request.VehicleDeleteRequest;
+import com.yuan.foodtrace.auth.domain.request.VehicleInsertRequest;
+import com.yuan.foodtrace.auth.domain.request.VehicleUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/vehicle")
@@ -11,14 +13,12 @@ public interface VehicleApi {
     Object listVehicle();
 
     @PostMapping()
-    Object newVehicle(@RequestBody VehicleDTO dto);
+    Object newVehicle(@RequestBody VehicleInsertRequest request);
 
     @DeleteMapping(value = "/{id}")
-    Object deleteVehicle(@RequestBody VehicleDTO dto);
+    Object deleteVehicle(@RequestBody VehicleDeleteRequest request);
 
     @PutMapping(value = "/{id}")
-    Object updateVehicle(@RequestBody VehicleDTO dto);
+    Object updateVehicle(@RequestBody VehicleUpdateRequest request);
 
-    @GetMapping()
-    Object fineOne(String id);
 }

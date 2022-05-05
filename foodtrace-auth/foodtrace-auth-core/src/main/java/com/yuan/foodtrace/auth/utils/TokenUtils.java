@@ -15,9 +15,13 @@ import java.util.Objects;
 public class TokenUtils {
 
     public static String getTokenUserName() {
-        String token = Objects.requireNonNull(getRequest()).getHeader("X-Token");
-        System.out.println(token);
+        String token = getToken();
         return JWT.decode(token).getAudience().get(0);
+    }
+
+    public static String getCompany() {
+        String token = getToken();
+        return JWT.decode(token).getClaim("company").asString();
     }
 
     /**
@@ -27,5 +31,9 @@ public class TokenUtils {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         return requestAttributes == null ? null : requestAttributes.getRequest();
+    }
+
+    private static String getToken() {
+        return Objects.requireNonNull(getRequest()).getHeader("X-Token");
     }
 }

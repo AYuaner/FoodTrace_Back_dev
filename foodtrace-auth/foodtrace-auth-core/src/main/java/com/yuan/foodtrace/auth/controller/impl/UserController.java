@@ -61,6 +61,7 @@ public class UserController implements UserApi {
         ArrayList<String> roles = new ArrayList<>();
         roles.add(userInfo.getRole());
 
+
         jsonObject.put("roles", roles);
         jsonObject.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         jsonObject.put("name", userInfo.getUsername());
