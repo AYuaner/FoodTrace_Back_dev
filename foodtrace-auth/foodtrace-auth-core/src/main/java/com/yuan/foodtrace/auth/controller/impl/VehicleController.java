@@ -7,6 +7,7 @@ import com.yuan.foodtrace.auth.domain.command.VehicleUpdateCommand;
 import com.yuan.foodtrace.auth.domain.request.VehicleDeleteRequest;
 import com.yuan.foodtrace.auth.domain.request.VehicleInsertRequest;
 import com.yuan.foodtrace.auth.domain.request.VehicleUpdateRequest;
+import com.yuan.foodtrace.auth.entity.VehicleRecord;
 import com.yuan.foodtrace.auth.service.VehicleService;
 import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
@@ -63,7 +64,7 @@ public class VehicleController implements VehicleApi {
 
     @Override
     public Object deleteVehicle(VehicleDeleteRequest request) {
-        if (StringUtils.isEmpty(request.getId())) {
+        if (request.getId()==null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
         if (StringUtils.isEmpty(request.getLicense())) {
@@ -79,8 +80,8 @@ public class VehicleController implements VehicleApi {
 
     @Override
     public Object updateVehicle(VehicleUpdateRequest request) {
-        if (StringUtils.isEmpty(request.getId())) {
-            return returnFalseResultWithReason("`id` is empty.");
+        if (request.getId() == null) {
+            return returnFalseResultWithReason("`id` is null.");
         }
         VehicleUpdateCommand command = VehicleUpdateCommand.fromRequest(request, TokenUtils.getCompany());
         if (!vehicleService.update(command)) {

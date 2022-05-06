@@ -7,6 +7,7 @@ import com.yuan.foodtrace.auth.domain.command.AccountUpdateCommand;
 import com.yuan.foodtrace.auth.domain.request.AccountDeleteRequest;
 import com.yuan.foodtrace.auth.domain.request.AccountInsertRequest;
 import com.yuan.foodtrace.auth.domain.request.AccountUpdateRequest;
+import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.service.AccountService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

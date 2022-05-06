@@ -1,5 +1,7 @@
 package com.yuan.foodtrace.auth.domain.dto;
 
+import com.yuan.foodtrace.auth.entity.UserRecord;
+
 public class UserDTO {
 
     private Long id;

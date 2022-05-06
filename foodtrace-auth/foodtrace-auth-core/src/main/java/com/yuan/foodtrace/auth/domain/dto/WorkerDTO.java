@@ -1,5 +1,7 @@
 package com.yuan.foodtrace.auth.domain.dto;
 
+import com.yuan.foodtrace.auth.entity.WorkerRecord;
+
 import java.io.Serializable;
 
 public class WorkerDTO implements Serializable {
