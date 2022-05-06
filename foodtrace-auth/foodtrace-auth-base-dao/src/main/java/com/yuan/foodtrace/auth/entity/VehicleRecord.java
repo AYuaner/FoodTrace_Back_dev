@@ -14,7 +14,7 @@ public class VehicleRecord implements Serializable {
      *   车辆标识码
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.id")
-    private String id;
+    private Long id;
 
     /**
      * Database Column Remarks:
@@ -55,12 +55,12 @@ public class VehicleRecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.id")
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.id")
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -4,10 +4,6 @@ import com.yuan.foodtrace.auth.domain.dto.FarmDTO;
 import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
 import com.yuan.foodtrace.auth.domain.dto.WorkerDTO;
 import com.yuan.foodtrace.auth.domain.dto.UserDTO;
-import com.yuan.foodtrace.auth.entity.FarmRecord;
-import com.yuan.foodtrace.auth.entity.UserRecord;
-import com.yuan.foodtrace.auth.entity.VehicleRecord;
-import com.yuan.foodtrace.auth.entity.WorkerRecord;
 
 import java.util.Objects;
 

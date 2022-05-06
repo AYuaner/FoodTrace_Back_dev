@@ -14,7 +14,7 @@ public final class WorkerRecordDynamicSqlSupport {
      *   工人 ID
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: worker.id")
-    public static final SqlColumn<String> id = workerRecord.id;
+    public static final SqlColumn<Long> id = workerRecord.id;
 
     /**
      * Database Column Remarks:
@@ -60,7 +60,7 @@ public final class WorkerRecordDynamicSqlSupport {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     public static final class WorkerRecord extends SqlTable {
-        public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<String> name = column("name", JDBCType.VARCHAR);
 

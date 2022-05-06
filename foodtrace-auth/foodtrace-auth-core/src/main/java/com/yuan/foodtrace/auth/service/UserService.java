@@ -1,7 +1,6 @@
 package com.yuan.foodtrace.auth.service;
 
 import com.yuan.foodtrace.auth.domain.dto.UserDTO;
-import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.mapper.UserMapper;
 import com.yuan.foodtrace.auth.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;

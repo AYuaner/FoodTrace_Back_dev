@@ -1,15 +1,12 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.controller.api.VehicleApi;
 import com.yuan.foodtrace.auth.domain.command.VehicleDeleteCommand;
 import com.yuan.foodtrace.auth.domain.command.VehicleInsertCommand;
 import com.yuan.foodtrace.auth.domain.command.VehicleUpdateCommand;
-import com.yuan.foodtrace.auth.domain.dto.VehicleDTO;
 import com.yuan.foodtrace.auth.domain.request.VehicleDeleteRequest;
 import com.yuan.foodtrace.auth.domain.request.VehicleInsertRequest;
 import com.yuan.foodtrace.auth.domain.request.VehicleUpdateRequest;
-import com.yuan.foodtrace.auth.entity.VehicleRecord;
 import com.yuan.foodtrace.auth.service.VehicleService;
 import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;

@@ -2,14 +2,14 @@ package com.yuan.foodtrace.auth.domain.request;
 
 public class VehicleUpdateRequest {
 
-    private String id;
+    private Long id;
     private String brand;
     private String type;
     private String buyYear;
     private String license;
     private String company;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

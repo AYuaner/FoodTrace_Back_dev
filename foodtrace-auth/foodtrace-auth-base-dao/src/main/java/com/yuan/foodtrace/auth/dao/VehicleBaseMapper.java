@@ -61,7 +61,7 @@ public interface VehicleBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="VehicleRecordResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="brand", property="brand", jdbcType=JdbcType.VARCHAR),
         @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
         @Result(column="buy_year", property="buyYear", jdbcType=JdbcType.VARCHAR),
@@ -85,7 +85,7 @@ public interface VehicleBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
-    default int deleteByPrimaryKey(String id_) {
+    default int deleteByPrimaryKey(Long id_) {
         return delete(c -> 
             c.where(id, isEqualTo(id_))
         );
@@ -143,7 +143,7 @@ public interface VehicleBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
-    default Optional<VehicleRecord> selectByPrimaryKey(String id_) {
+    default Optional<VehicleRecord> selectByPrimaryKey(Long id_) {
         return selectOne(c ->
             c.where(id, isEqualTo(id_))
         );

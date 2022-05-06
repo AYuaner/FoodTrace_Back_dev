@@ -4,7 +4,7 @@ import com.yuan.foodtrace.auth.domain.request.VehicleUpdateRequest;
 
 public class VehicleUpdateCommand {
 
-    private String id;
+    private Long id;
     private String brand;
     private String type;
     private String buyYear;
@@ -24,7 +24,7 @@ public class VehicleUpdateCommand {
         );
     }
 
-    private VehicleUpdateCommand(String id, String brand, String type, String buyYear, String license, String company,
+    private VehicleUpdateCommand(Long id, String brand, String type, String buyYear, String license, String company,
                                 String operatorCompany) {
         this.id = id;
         this.brand = brand;
@@ -35,7 +35,7 @@ public class VehicleUpdateCommand {
         this.operatorCompany = operatorCompany;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

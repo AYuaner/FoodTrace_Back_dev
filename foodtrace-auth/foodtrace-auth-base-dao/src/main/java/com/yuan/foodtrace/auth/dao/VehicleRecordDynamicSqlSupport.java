@@ -14,7 +14,7 @@ public final class VehicleRecordDynamicSqlSupport {
      *   车辆标识码
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.id")
-    public static final SqlColumn<String> id = vehicleRecord.id;
+    public static final SqlColumn<Long> id = vehicleRecord.id;
 
     /**
      * Database Column Remarks:
@@ -53,7 +53,7 @@ public final class VehicleRecordDynamicSqlSupport {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     public static final class VehicleRecord extends SqlTable {
-        public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<String> brand = column("brand", JDBCType.VARCHAR);
 

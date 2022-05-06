@@ -1,8 +1,5 @@
 package com.yuan.foodtrace.auth.mapper;
 
-import com.yuan.foodtrace.auth.dao.UserBaseMapper;
-import com.yuan.foodtrace.auth.dao.UserRecordDynamicSqlSupport;
-import com.yuan.foodtrace.auth.entity.UserRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

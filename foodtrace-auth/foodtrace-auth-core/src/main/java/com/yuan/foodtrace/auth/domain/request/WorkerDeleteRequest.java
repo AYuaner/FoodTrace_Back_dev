@@ -1,16 +1,15 @@
 package com.yuan.foodtrace.auth.domain.request;
 
-public class VehicleDeleteRequest {
+public class WorkerDeleteRequest {
 
     private Long id;
-    private String license;
+    private String idNumber;
 
     public Long getId() {
         return id;
     }
 
-    public String getLicense() {
-        return license;
+    public String getIdNumber() {
+        return idNumber;
     }
-
 }

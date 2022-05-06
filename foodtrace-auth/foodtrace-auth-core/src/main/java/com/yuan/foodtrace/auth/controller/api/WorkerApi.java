@@ -1,6 +1,8 @@
 package com.yuan.foodtrace.auth.controller.api;
 
-import com.yuan.foodtrace.auth.domain.dto.WorkerDTO;
+import com.yuan.foodtrace.auth.domain.request.WorkerDeleteRequest;
+import com.yuan.foodtrace.auth.domain.request.WorkerInsertRequest;
+import com.yuan.foodtrace.auth.domain.request.WorkerUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/worker")
@@ -11,14 +13,12 @@ public interface WorkerApi {
     Object listWorker();
 
     @PostMapping()
-    Object newWorker(@RequestBody WorkerDTO dto);
+    Object newWorker(@RequestBody WorkerInsertRequest request);
 
     @DeleteMapping(value = "/{id}")
-    Object deleteWorker(@RequestBody WorkerDTO dto);
+    Object deleteWorker(@RequestBody WorkerDeleteRequest request);
 
     @PutMapping(value = "/{id}")
-    Object updateWorker(@RequestBody WorkerDTO dto);
+    Object updateWorker(@RequestBody WorkerUpdateRequest request);
 
-    @GetMapping()
-    Object fineOne(String id);
 }

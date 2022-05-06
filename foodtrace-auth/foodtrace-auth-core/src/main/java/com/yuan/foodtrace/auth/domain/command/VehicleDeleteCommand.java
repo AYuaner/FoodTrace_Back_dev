@@ -4,7 +4,7 @@ import com.yuan.foodtrace.auth.domain.request.VehicleDeleteRequest;
 
 public class VehicleDeleteCommand {
 
-    private String id;
+    private Long id;
     private String license;
     private String operatorCompany;
 
@@ -12,13 +12,13 @@ public class VehicleDeleteCommand {
         return new VehicleDeleteCommand(request.getId(), request.getLicense(), operatorCompany);
     }
 
-    private VehicleDeleteCommand(String id, String license, String operatorCompany) {
+    private VehicleDeleteCommand(Long id, String license, String operatorCompany) {
         this.id = id;
         this.license = license;
         this.operatorCompany = operatorCompany;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

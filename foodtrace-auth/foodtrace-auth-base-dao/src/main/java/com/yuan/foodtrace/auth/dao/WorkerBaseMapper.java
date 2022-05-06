@@ -61,7 +61,7 @@ public interface WorkerBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="WorkerRecordResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_number", property="idNumber", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone_number", property="phoneNumber", jdbcType=JdbcType.VARCHAR),
@@ -86,7 +86,7 @@ public interface WorkerBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
-    default int deleteByPrimaryKey(String id_) {
+    default int deleteByPrimaryKey(Long id_) {
         return delete(c -> 
             c.where(id, isEqualTo(id_))
         );
@@ -147,7 +147,7 @@ public interface WorkerBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
-    default Optional<WorkerRecord> selectByPrimaryKey(String id_) {
+    default Optional<WorkerRecord> selectByPrimaryKey(Long id_) {
         return selectOne(c ->
             c.where(id, isEqualTo(id_))
         );

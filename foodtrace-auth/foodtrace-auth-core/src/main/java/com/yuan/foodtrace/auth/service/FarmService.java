@@ -19,16 +19,18 @@ public class FarmService {
 
     /**
      * get the list of farm owned by operator's company.
-     * @param company the company work at or onw
+     *
+     * @param operatorCompany the company work at or onw
      * @return list of FarmRecord
      */
-    public List<FarmRecord> listWithCompany(String company) {
-        return farmMapper.listWithCompany(company);
+    public List<FarmRecord> listWithCompany(String operatorCompany) {
+        return farmMapper.listWithCompany(operatorCompany);
     }
 
 
     /**
      * get list of all farm
+     *
      * @return list of FarmRecord
      */
     public List<FarmRecord> list() {
@@ -37,6 +39,7 @@ public class FarmService {
 
     /**
      * insert a new farm record.
+     *
      * @param command the arguments INSERT need
      * @return result of operation
      */
@@ -53,6 +56,7 @@ public class FarmService {
 
     /**
      * delete a farm record.
+     *
      * @param command the arguments DELETE need
      * @return result of operation
      */
@@ -68,14 +72,12 @@ public class FarmService {
 
     /**
      * update a farm record.
+     *
      * @param command a record with new value of field
      * @return result of operation
      */
     public boolean update(FarmUpdateCommand command) {
         if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
-            return false;
-        }
-        if (!_validateIdAndName(command.getId(), command.getName())) {
             return false;
         }
         FarmRecord record = new FarmRecord();
@@ -99,8 +101,8 @@ public class FarmService {
      */
     private boolean _validateIdAndCompany(Long id, String operatorCompany) {
         FarmRecord record = farmMapper.selectByPrimaryKey(id).orElse(new FarmRecord());
-        return StringUtils.equals(record.getCompany(), operatorCompany)
-                || "admin".equalsIgnoreCase(operatorCompany);
+        return StringUtils.equals(record.getCompany(), operatorCompany) // operator's company
+                || "admin".equalsIgnoreCase(operatorCompany);   // admin
     }
 
     /**
