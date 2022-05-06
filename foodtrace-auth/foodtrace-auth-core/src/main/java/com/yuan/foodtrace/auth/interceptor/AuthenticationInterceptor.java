@@ -32,7 +32,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 从http请求头中取出
-        String token = request.getHeader("token");
+        String token = request.getHeader("X-Token");
         // 如果不是映射到方法直接通过
         if (!(handler instanceof HandlerMethod)) {
             return true;
@@ -74,14 +74,14 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             throw new RuntimeException("`token` is null");
         }
         // 获取token中的uer id
-        Long userId;
+        String username;
         try {
-            userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
+            username = JWT.decode(token).getAudience().get(0);
         } catch (JWTDecodeException jwtD) {
             throw new RuntimeException("jwt decode fail");
         }
-        UserDTO userDTO = userService.findUserById(userId);
-        if (userDTO == null) {
+        UserDTO userDTO = userService.findByUsername(username);
+        if (userDTO.getId() == null) {
             throw new RuntimeException("user not exist");
         }
         // 验证Token

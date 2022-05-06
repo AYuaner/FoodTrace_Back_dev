@@ -1,6 +1,7 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yuan.foodtrace.auth.annotation.UserLoginToken;
 import com.yuan.foodtrace.auth.domain.dto.UserDTO;
 import com.yuan.foodtrace.auth.domain.request.UserLoginRequest;
 import com.yuan.foodtrace.auth.service.TokenService;
@@ -51,6 +52,7 @@ public class UserController implements UserApi {
         return jsonObject;
     }
 
+    @UserLoginToken
     @Override
     public Object getInfo() {
         JSONObject jsonObject = new JSONObject();

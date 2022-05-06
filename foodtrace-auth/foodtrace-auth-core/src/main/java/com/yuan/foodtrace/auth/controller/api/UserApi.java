@@ -29,7 +29,6 @@ public interface UserApi {
      *
      * @return 结果
      */
-    @UserLoginToken
     @GetMapping(value = "/info")
     Object getInfo();
 
