@@ -1,5 +1,7 @@
 package com.yuan.foodtrace.auth.domain.command;
 
+import com.yuan.foodtrace.auth.domain.request.FarmUpdateRequest;
+
 public class FarmUpdateCommand {
 
     private Long id;
@@ -8,7 +10,17 @@ public class FarmUpdateCommand {
     private String location;
     private String operatorCompany;
 
-    public FarmUpdateCommand(Long id, String name, String company, String location, String operatorCompany) {
+    public static FarmUpdateCommand fromRequest(FarmUpdateRequest request, String operatorCompany) {
+        return new FarmUpdateCommand(
+                request.getId(),
+                request.getName(),
+                request.getCompany(),
+                request.getLocation(),
+                operatorCompany
+        );
+    }
+
+    private FarmUpdateCommand(Long id, String name, String company, String location, String operatorCompany) {
         this.id = id;
         this.name = name;
         this.company = company;

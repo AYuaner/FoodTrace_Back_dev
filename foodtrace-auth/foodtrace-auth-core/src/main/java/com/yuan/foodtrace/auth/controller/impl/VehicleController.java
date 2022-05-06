@@ -25,12 +25,16 @@ public class VehicleController implements VehicleApi {
     @Autowired
     VehicleService vehicleService;
 
-
     @Override
     public Object listVehicle() {
-        String company = TokenUtils.getCompany();
-        List<VehicleRecord> vehicleList = vehicleService.list(company);
-        return vehicleList;
+        String operatorCompany = TokenUtils.getCompany();
+        List<VehicleRecord> vehicleList;
+        if ("admin".equalsIgnoreCase(operatorCompany)) {
+            vehicleList = vehicleService.list();
+        } else {
+            vehicleList = vehicleService.listWithCompany(operatorCompany);
+        }
+        return returnListData(vehicleList);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class VehicleController implements VehicleApi {
 
     @Override
     public Object deleteVehicle(VehicleDeleteRequest request) {
-        if (request.getId()==null) {
+        if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
         if (StringUtils.isEmpty(request.getLicense())) {

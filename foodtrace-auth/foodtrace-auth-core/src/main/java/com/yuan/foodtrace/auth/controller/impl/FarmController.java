@@ -52,10 +52,7 @@ public class FarmController implements FarmApi {
             return returnFalseResultWithReason("`location` is empty");
         }
 
-        FarmInsertCommand command = new FarmInsertCommand(
-                request.getName(),
-                request.getCompany(),
-                request.getLocation());
+        FarmInsertCommand command = FarmInsertCommand.fromRequest(request, TokenUtils.getCompany());
 
         if (!farmService.insert(command)) {
             return returnFailWithNoReason(OperateType.INSERT);
@@ -65,17 +62,14 @@ public class FarmController implements FarmApi {
 
     @Override
     public Object deleteFarm(FarmDeleteRequest request) {
-        if (request.getId()==null) {
+        if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
         if (StringUtils.isEmpty(request.getName())) {
             return returnFalseResultWithReason("`name` is empty.");
         }
 
-        FarmDeleteCommand command = new FarmDeleteCommand(
-                request.getId(),
-                request.getName(),
-                TokenUtils.getCompany());
+        FarmDeleteCommand command = FarmDeleteCommand.fromRequest(request, TokenUtils.getCompany());
 
         if (!farmService.delete(command)) {
             return returnFailWithNoReason(OperateType.DELETE);
@@ -85,16 +79,11 @@ public class FarmController implements FarmApi {
 
     @Override
     public Object updateFarm(FarmUpdateRequest request) {
-        if (request.getId()==null) {
+        if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is empty.");
         }
 
-        FarmUpdateCommand command = new FarmUpdateCommand(
-                request.getId(),
-                request.getName(),
-                request.getCompany(),
-                request.getLocation(),
-                TokenUtils.getCompany());
+        FarmUpdateCommand command = FarmUpdateCommand.fromRequest(request, TokenUtils.getCompany());
 
         if (!farmService.update(command)) {
             return returnFailWithNoReason(OperateType.UPDATE);

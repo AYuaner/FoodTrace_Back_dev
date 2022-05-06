@@ -13,7 +13,11 @@ import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 @Mapper
 public interface VehicleMapper extends VehicleBaseMapper {
 
-    default List<VehicleRecord> list(String _company) {
+    default List<VehicleRecord> list() {
+        return select(c -> c);
+    }
+
+    default List<VehicleRecord> listWithCompany(String _company) {
         return select(c ->
                 c.where(company, isEqualTo(_company)));
     }

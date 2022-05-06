@@ -34,10 +34,10 @@ public class WorkerController implements WorkerApi {
         List<WorkerRecord> workerList;
         if ("admin".equalsIgnoreCase(operatorCompany)) {
             workerList = workerService.list();
-        }else{
+        } else {
             workerList = workerService.listWithCompany(operatorCompany);
         }
-        return workerList;
+        return returnListData(workerList);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class WorkerController implements WorkerApi {
 
     @Override
     public Object deleteWorker(WorkerDeleteRequest request) {
-        if (request.getId()==null) {
+        if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is null");
         }
         if (StringUtils.isEmpty(request.getIdNumber())) {
@@ -85,7 +85,7 @@ public class WorkerController implements WorkerApi {
 
     @Override
     public Object updateWorker(WorkerUpdateRequest request) {
-        if (request.getId()==null) {
+        if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is null");
         }
         WorkerUpdateCommand command = WorkerUpdateCommand.fromRequest(request, TokenUtils.getCompany());

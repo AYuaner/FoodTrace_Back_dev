@@ -47,6 +47,9 @@ public class FarmService {
         if (!_validateNameNoUse(command.getName())) {
             return false;
         }
+        if (!StringUtils.equals(command.getCompany(), command.getOperatorCompany())) {
+            return false;
+        }
         FarmRecord record = new FarmRecord();
         record.setName(command.getName());
         record.setCompany(command.getCompany());
@@ -61,7 +64,7 @@ public class FarmService {
      * @return result of operation
      */
     public boolean delete(FarmDeleteCommand command) {
-        if (!_validateIdAndCompany(command.getId(), command.getCompany())) {
+        if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
             return false;
         }
         if (!_validateIdAndName(command.getId(), command.getName())) {

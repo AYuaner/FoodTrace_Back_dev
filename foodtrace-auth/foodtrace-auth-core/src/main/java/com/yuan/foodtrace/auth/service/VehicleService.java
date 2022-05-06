@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.yuan.foodtrace.auth.dao.VehicleRecordDynamicSqlSupport.license;
-
 @Service
 public class VehicleService {
 
@@ -21,15 +19,26 @@ public class VehicleService {
 
     /**
      * get the list of vehicle owned by operator's company.
-     * @param company the company work at or onw
+     *
+     * @param operatorCompany the company work at or onw
      * @return list of VehicleRecord
      */
-    public List<VehicleRecord> list(String company) {
-        return vehicleMapper.list(company);
+    public List<VehicleRecord> listWithCompany(String operatorCompany) {
+        return vehicleMapper.listWithCompany(operatorCompany);
+    }
+
+    /**
+     * get list of all vehicle
+     *
+     * @return list of VehicleRecord
+     */
+    public List<VehicleRecord> list() {
+        return vehicleMapper.list();
     }
 
     /**
      * insert a new vehicle record.
+     *
      * @param command the arguments INSERT need
      * @return result of operation
      */
@@ -48,11 +57,15 @@ public class VehicleService {
 
     /**
      * delete a vehicle record.
+     *
      * @param command the arguments DELETE need
      * @return result of operation
      */
     public boolean delete(VehicleDeleteCommand command) {
-        if (!_validateIdCompanyLicense(command.getId(), command.getOperatorCompany(), command.getLicense())) {
+        if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
+            return false;
+        }
+        if (!_validateIdAndLicense(command.getId(), command.getLicense())) {
             return false;
         }
         return vehicleMapper.deleteByPrimaryKey(command.getId()) == 0 ? false : true;
@@ -60,11 +73,12 @@ public class VehicleService {
 
     /**
      * update a vehicle record.
+     *
      * @param command a record with new value of field
      * @return result fo operation
      */
     public boolean update(VehicleUpdateCommand command) {
-        if (!_validateIdCompanyLicense(command.getId(), command.getOperatorCompany(), command.getLicense())) {
+        if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
             return false;
         }
         VehicleRecord record = new VehicleRecord();
@@ -81,28 +95,24 @@ public class VehicleService {
      * to ensure `license` not be used.
      */
     private boolean _validateLicenseNoUse(String license) {
-        VehicleRecord record = vehicleMapper.findByLicense(license)
-                .orElseThrow(() -> new RuntimeException("该license的vehicle不存在"));
-        return record.getId() != null;
+        VehicleRecord record = vehicleMapper.findByLicense(license).orElse(new VehicleRecord());
+        return record.getId() == null;
     }
 
     /**
-     * to ensure
-     * operator can only operate the record his company own
-     * `id` and `license` can match.
+     * to ensure operator can only operate the record his company own
      */
-    private boolean _validateIdCompanyLicense(Long id, String operatorCompany, String license) {
-        VehicleRecord record = vehicleMapper.selectByPrimaryKey(id)
-                .orElseThrow(() -> new RuntimeException("该id vehicle不存在"));
-        if (!StringUtils.equals(record.getCompany(), operatorCompany)) {
-            return false;
-        }
-        if (!"admin".equalsIgnoreCase(record.getCompany())) {
-            return false;
-        }
-        if (!StringUtils.equals(record.getLicense(), license)) {
-            return false;
-        }
-        return true;
+    private boolean _validateIdAndCompany(Long id, String operatorCompany) {
+        VehicleRecord record = vehicleMapper.selectByPrimaryKey(id).orElse(new VehicleRecord());
+        return StringUtils.equals(record.getCompany(), operatorCompany)
+                || "admin".equalsIgnoreCase(operatorCompany);
+    }
+
+    /**
+     * to ensure `id` and `license` can match.
+     */
+    private boolean _validateIdAndLicense(Long id, String license) {
+        VehicleRecord record = vehicleMapper.selectByPrimaryKey(id).orElse(new VehicleRecord());
+        return StringUtils.equals(record.getLicense(), license);
     }
 }
