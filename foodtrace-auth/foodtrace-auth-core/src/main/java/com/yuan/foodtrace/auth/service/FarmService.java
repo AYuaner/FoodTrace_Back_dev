@@ -5,6 +5,7 @@ import com.yuan.foodtrace.auth.domain.command.FarmInsertCommand;
 import com.yuan.foodtrace.auth.domain.command.FarmUpdateCommand;
 import com.yuan.foodtrace.auth.entity.FarmRecord;
 import com.yuan.foodtrace.auth.mapper.FarmMapper;
+import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,10 @@ public class FarmService {
         }
         FarmRecord record = new FarmRecord();
         record.setName(command.getName());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         record.setLocation(command.getLocation());
         return farmMapper.insert(record) == 0 ? false : true;
     }
@@ -86,7 +90,10 @@ public class FarmService {
         FarmRecord record = new FarmRecord();
         record.setId(command.getId());
         record.setName(command.getName());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         record.setLocation(command.getLocation());
         return farmMapper.updateByPrimaryKeySelective(record) == 0 ? false : true;
     }

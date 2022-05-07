@@ -58,7 +58,11 @@ public class VehicleController implements VehicleApi {
             return returnFalseResultWithReason("`company` is empty");
         }
 
-        VehicleInsertCommand command = VehicleInsertCommand.fromRequest(request);
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Vehicle To Other Company");
+        }
+        VehicleInsertCommand command = VehicleInsertCommand.fromRequest(request, operatorCompany);
 
         if (!vehicleService.insert(command)) {
             return returnFailWithNoReason(OperateType.INSERT);
@@ -87,7 +91,13 @@ public class VehicleController implements VehicleApi {
         if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is null.");
         }
-        VehicleUpdateCommand command = VehicleUpdateCommand.fromRequest(request, TokenUtils.getCompany());
+
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not Change A Worker To Other Company");
+        }
+        VehicleUpdateCommand command = VehicleUpdateCommand.fromRequest(request, operatorCompany);
+
         if (!vehicleService.update(command)) {
             return returnFailWithNoReason(OperateType.UPDATE);
         }

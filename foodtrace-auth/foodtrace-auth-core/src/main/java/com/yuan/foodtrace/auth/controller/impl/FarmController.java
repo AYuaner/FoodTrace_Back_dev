@@ -52,7 +52,11 @@ public class FarmController implements FarmApi {
             return returnFalseResultWithReason("`location` is empty");
         }
 
-        FarmInsertCommand command = FarmInsertCommand.fromRequest(request, TokenUtils.getCompany());
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Worker To Other Company");
+        }
+        FarmInsertCommand command = FarmInsertCommand.fromRequest(request, operatorCompany);
 
         if (!farmService.insert(command)) {
             return returnFailWithNoReason(OperateType.INSERT);
@@ -83,7 +87,11 @@ public class FarmController implements FarmApi {
             return returnFalseResultWithReason("`id` is empty.");
         }
 
-        FarmUpdateCommand command = FarmUpdateCommand.fromRequest(request, TokenUtils.getCompany());
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Worker To Other Company");
+        }
+        FarmUpdateCommand command = FarmUpdateCommand.fromRequest(request, operatorCompany);
 
         if (!farmService.update(command)) {
             return returnFailWithNoReason(OperateType.UPDATE);

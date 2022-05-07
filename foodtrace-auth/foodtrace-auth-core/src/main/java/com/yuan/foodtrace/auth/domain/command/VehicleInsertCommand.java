@@ -9,23 +9,27 @@ public class VehicleInsertCommand {
     private String buyYear;
     private String license;
     private String company;
+    private String operatorCompany;
 
-    public static VehicleInsertCommand fromRequest(VehicleInsertRequest request) {
+    public static VehicleInsertCommand fromRequest(VehicleInsertRequest request, String operatorCompany) {
         return new VehicleInsertCommand(
                 request.getBrand(),
                 request.getType(),
                 request.getBuyYear(),
                 request.getLicense(),
-                request.getCompany()
+                request.getCompany(),
+                operatorCompany
         );
     }
 
-    private VehicleInsertCommand(String brand, String type, String buyYear, String license, String company) {
+    private VehicleInsertCommand(String brand, String type, String buyYear, String license, String company,
+                                 String operatorCompany) {
         this.brand = brand;
         this.type = type;
         this.buyYear = buyYear;
         this.license = license;
         this.company = company;
+        this.operatorCompany = operatorCompany;
     }
 
     public String getBrand() {
@@ -46,5 +50,13 @@ public class VehicleInsertCommand {
 
     public String getCompany() {
         return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getOperatorCompany() {
+        return operatorCompany;
     }
 }

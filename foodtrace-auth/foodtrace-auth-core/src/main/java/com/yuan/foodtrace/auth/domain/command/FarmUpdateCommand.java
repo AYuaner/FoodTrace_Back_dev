@@ -40,6 +40,10 @@ public class FarmUpdateCommand {
         return company;
     }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getLocation() {
         return location;
     }

@@ -1,12 +1,9 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.controller.api.WorkerApi;
-import com.yuan.foodtrace.auth.domain.command.FarmDeleteCommand;
 import com.yuan.foodtrace.auth.domain.command.WorkerDeleteCommand;
 import com.yuan.foodtrace.auth.domain.command.WorkerInsertCommand;
 import com.yuan.foodtrace.auth.domain.command.WorkerUpdateCommand;
-import com.yuan.foodtrace.auth.domain.dto.WorkerDTO;
 import com.yuan.foodtrace.auth.domain.request.WorkerDeleteRequest;
 import com.yuan.foodtrace.auth.domain.request.WorkerInsertRequest;
 import com.yuan.foodtrace.auth.domain.request.WorkerUpdateRequest;
@@ -61,7 +58,12 @@ public class WorkerController implements WorkerApi {
             return returnFalseResultWithReason("`gender` is null");
         }
 
-        WorkerInsertCommand command = WorkerInsertCommand.fromRequest(request, TokenUtils.getCompany());
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Worker To Other Company");
+        }
+        WorkerInsertCommand command = WorkerInsertCommand.fromRequest(request, operatorCompany);
+
         if (!workerService.insert(command)) {
             return returnFailWithNoReason(OperateType.INSERT);
         }
@@ -88,7 +90,12 @@ public class WorkerController implements WorkerApi {
         if (request.getId() == null) {
             return returnFalseResultWithReason("`id` is null");
         }
-        WorkerUpdateCommand command = WorkerUpdateCommand.fromRequest(request, TokenUtils.getCompany());
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not Change A Worker To Other Company");
+        }
+        WorkerUpdateCommand command = WorkerUpdateCommand.fromRequest(request, operatorCompany);
+
         if (!workerService.update(command)) {
             return returnFailWithNoReason(OperateType.UPDATE);
         }

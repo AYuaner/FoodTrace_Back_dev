@@ -66,6 +66,10 @@ public class WorkerUpdateCommand {
         return company;
     }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getOperatorCompany() {
         return operatorCompany;
     }

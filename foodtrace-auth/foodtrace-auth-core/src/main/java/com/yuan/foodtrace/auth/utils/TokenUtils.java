@@ -1,6 +1,7 @@
 package com.yuan.foodtrace.auth.utils;
 
 import com.auth0.jwt.JWT;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -22,6 +23,13 @@ public class TokenUtils {
     public static String getCompany() {
         String token = getToken();
         return JWT.decode(token).getClaim("company").asString();
+    }
+
+    public static boolean checkRoleEqualToAdmin(String operatorCompany) {
+        if (StringUtils.isEmpty(operatorCompany)) {
+            operatorCompany = "";
+        }
+        return "admin".equalsIgnoreCase(operatorCompany);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.yuan.foodtrace.auth.domain.command.WorkerInsertCommand;
 import com.yuan.foodtrace.auth.domain.command.WorkerUpdateCommand;
 import com.yuan.foodtrace.auth.entity.WorkerRecord;
 import com.yuan.foodtrace.auth.mapper.WorkerMapper;
+import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,10 @@ public class WorkerService {
         record.setPhoneNumber(command.getPhoneNumber());
         record.setAge(command.getAge());
         record.setGender(command.getGender());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         return workerMapper.insert(record) == 0 ? false : true;
     }
 
@@ -89,7 +93,10 @@ public class WorkerService {
         record.setPhoneNumber(command.getPhoneNumber());
         record.setAge(command.getAge());
         record.setGender(command.getGender());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         return workerMapper.updateByPrimaryKeySelective(record) == 0 ? false : true;
     }
 

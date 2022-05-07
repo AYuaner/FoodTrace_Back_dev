@@ -33,6 +33,10 @@ public class FarmInsertCommand {
         return company;
     }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -40,4 +44,5 @@ public class FarmInsertCommand {
     public String getOperatorCompany() {
         return operatorCompany;
     }
+
 }

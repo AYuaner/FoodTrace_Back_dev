@@ -5,6 +5,7 @@ import com.yuan.foodtrace.auth.domain.command.VehicleInsertCommand;
 import com.yuan.foodtrace.auth.domain.command.VehicleUpdateCommand;
 import com.yuan.foodtrace.auth.entity.VehicleRecord;
 import com.yuan.foodtrace.auth.mapper.VehicleMapper;
+import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,10 @@ public class VehicleService {
         record.setType(command.getType());
         record.setBrand(command.getBrand());
         record.setBuyYear(command.getBuyYear());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         record.setLicense(command.getLicense());
         return vehicleMapper.insert(record) == 0 ? false : true;
     }
@@ -87,7 +91,10 @@ public class VehicleService {
         record.setType(command.getType());
         record.setBuyYear(command.getBuyYear());
         record.setLicense(command.getLicense());
-        record.setCompany(command.getCompany());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
         return vehicleMapper.updateByPrimaryKeySelective(record) == 0 ? false : true;
     }
 
