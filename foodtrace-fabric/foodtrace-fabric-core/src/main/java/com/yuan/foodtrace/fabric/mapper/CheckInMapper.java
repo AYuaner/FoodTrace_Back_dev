@@ -6,12 +6,15 @@ import com.yuan.foodtrace.fabric.entity.SeedInfo;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+@Component
 public class CheckInMapper {
 
     private final Contract contract = FabricUtils.getContract("CheckIn");
@@ -38,6 +41,7 @@ public class CheckInMapper {
                             info.getLocation(),
                             info.getOperatorId(),
                             info.getOperatorName(),
+                            info.getCreatedTime(),
                             info.getRemarks());
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,5 +62,17 @@ public class CheckInMapper {
         String resultStr = new String(result, StandardCharsets.UTF_8);
         List<CheckIn> checkIns = JSON.parseArray(resultStr, CheckIn.class);
         return checkIns == null ? new ArrayList<>() : checkIns;
+    }
+
+    public int count() {
+        byte[] result;
+        try {
+            result = contract.evaluateTransaction("GetCount");
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        String count = new String(result, StandardCharsets.UTF_8);
+        return Integer.parseInt(count);
     }
 }

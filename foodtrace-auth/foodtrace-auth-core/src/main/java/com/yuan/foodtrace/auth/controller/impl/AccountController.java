@@ -22,6 +22,7 @@ import static com.yuan.foodtrace.auth.utils.ReturnUtils.*;
  */
 @RestController
 public class AccountController implements AccountApi {
+    // TODO 添加count函数，为前端echarts表提供数据
 
     @Autowired
     AccountService accountService;

@@ -5,6 +5,7 @@ import com.yuan.foodtrace.fabric.mapper.GrowInfoMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class GrowInfoService {
         GrowInfo infoById = queryByOperaId(info.getOperationId());
         if (infoById.getOperationId() == null) {
             LocalDateTime time = LocalDateTime.now();
-            info.setCreatedTime(time.toString());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            info.setCreatedTime(time.format(formatter));
             return mapper.insert(info);
         }
         return false;
@@ -36,5 +38,9 @@ public class GrowInfoService {
     public List<GrowInfo> queryByCropsId(String cropsId) {
         List<GrowInfo> growInfos = mapper.queryByCropsId(cropsId);
         return growInfos == null ? new ArrayList<>() : growInfos;
+    }
+
+    public int getCount() {
+        return mapper.count();
     }
 }

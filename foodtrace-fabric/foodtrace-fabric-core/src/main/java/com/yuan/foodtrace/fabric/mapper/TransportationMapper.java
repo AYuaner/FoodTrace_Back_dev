@@ -6,11 +6,13 @@ import com.yuan.foodtrace.fabric.entity.Transportation;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TransportationMapper {
 
     private final Contract contract = FabricUtils.getContract("Transportation");
@@ -40,6 +42,7 @@ public class TransportationMapper {
                             info.getEndTime(),
                             info.getVehicle(),
                             info.getDriver(),
+                            info.getCreatedTime(),
                             info.getRemarks());
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,5 +64,17 @@ public class TransportationMapper {
         String resultStr = new String(result, StandardCharsets.UTF_8);
         List<Transportation> transportations = JSON.parseArray(resultStr, Transportation.class);
         return transportations == null ? new ArrayList<>() : transportations;
+    }
+
+    public int count() {
+        byte[] result;
+        try {
+            result = contract.evaluateTransaction("GetCount");
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        String count = new String(result, StandardCharsets.UTF_8);
+        return Integer.parseInt(count);
     }
 }

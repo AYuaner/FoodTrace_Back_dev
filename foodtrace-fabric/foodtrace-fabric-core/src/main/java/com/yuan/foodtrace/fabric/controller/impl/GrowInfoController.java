@@ -35,6 +35,7 @@ public class GrowInfoController implements GrowInfoApi {
 
     @Override
     public Object newGrowInfo(GrowInfo info) {
+        System.out.println(info);
         if (info == null) {
             return returnFalse("`info` is null");
         }
