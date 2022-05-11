@@ -44,6 +44,13 @@ public final class UserRecordDynamicSqlSupport {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.enable")
     public static final SqlColumn<Boolean> enable = userRecord.enable;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: user.company")
+    public static final SqlColumn<String> company = userRecord.company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: user")
     public static final class UserRecord extends SqlTable {
         public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
@@ -55,6 +62,8 @@ public final class UserRecordDynamicSqlSupport {
         public final SqlColumn<String> role = column("role", JDBCType.VARCHAR);
 
         public final SqlColumn<Boolean> enable = column("enable", JDBCType.BIT);
+
+        public final SqlColumn<String> company = column("company", JDBCType.VARCHAR);
 
         public UserRecord() {
             super("user");

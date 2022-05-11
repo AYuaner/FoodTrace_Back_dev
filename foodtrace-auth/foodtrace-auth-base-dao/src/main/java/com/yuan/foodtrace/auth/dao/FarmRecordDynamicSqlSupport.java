@@ -14,7 +14,7 @@ public final class FarmRecordDynamicSqlSupport {
      *   农场 ID
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: farm.id")
-    public static final SqlColumn<String> id = farmRecord.id;
+    public static final SqlColumn<Long> id = farmRecord.id;
 
     /**
      * Database Column Remarks:
@@ -39,7 +39,7 @@ public final class FarmRecordDynamicSqlSupport {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: farm")
     public static final class FarmRecord extends SqlTable {
-        public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<String> name = column("name", JDBCType.VARCHAR);
 

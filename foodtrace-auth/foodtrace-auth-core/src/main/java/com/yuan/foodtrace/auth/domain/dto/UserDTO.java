@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.dto;
+package com.yuan.foodtrace.auth.domain.dto;
 
 import com.yuan.foodtrace.auth.entity.UserRecord;
 
@@ -9,6 +9,7 @@ public class UserDTO {
     private String password;
     private String role;
     private Boolean enable;
+    private String company;
 
     private static final long serialVersionUID = 1L;
 
@@ -50,6 +51,14 @@ public class UserDTO {
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.dto;
+package com.yuan.foodtrace.auth.domain.dto;
 
 import java.io.Serializable;
 
@@ -9,6 +9,7 @@ public class VehicleDTO implements Serializable {
     private String type;
     private String buyYear;
     private String license;
+    private String company;
 
     private static final long serialVersionUID = 1L;
 
@@ -50,6 +51,14 @@ public class VehicleDTO implements Serializable {
 
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override

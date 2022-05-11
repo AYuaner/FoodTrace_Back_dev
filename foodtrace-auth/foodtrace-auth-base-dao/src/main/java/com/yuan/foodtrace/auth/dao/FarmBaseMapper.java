@@ -61,7 +61,7 @@ public interface FarmBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: farm")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="FarmRecordResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="company", property="company", jdbcType=JdbcType.VARCHAR),
         @Result(column="location", property="location", jdbcType=JdbcType.VARCHAR)
@@ -83,7 +83,7 @@ public interface FarmBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: farm")
-    default int deleteByPrimaryKey(String id_) {
+    default int deleteByPrimaryKey(Long id_) {
         return delete(c -> 
             c.where(id, isEqualTo(id_))
         );
@@ -135,7 +135,7 @@ public interface FarmBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: farm")
-    default Optional<FarmRecord> selectByPrimaryKey(String id_) {
+    default Optional<FarmRecord> selectByPrimaryKey(Long id_) {
         return selectOne(c ->
             c.where(id, isEqualTo(id_))
         );

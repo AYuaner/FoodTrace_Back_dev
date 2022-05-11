@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.dto;
+package com.yuan.foodtrace.auth.domain;
 
 import com.yuan.foodtrace.auth.constant.ResultCode;
 

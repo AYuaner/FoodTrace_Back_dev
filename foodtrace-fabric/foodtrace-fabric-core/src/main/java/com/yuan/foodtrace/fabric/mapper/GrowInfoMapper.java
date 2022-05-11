@@ -5,11 +5,13 @@ import com.yuan.foodtrace.fabric.entity.GrowInfo;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GrowInfoMapper {
 
     private final Contract contract = FabricUtils.getContract("GrowInfo");
@@ -39,6 +41,7 @@ public class GrowInfoMapper {
                             info.getOperatorId(),
                             info.getOperatorName(),
                             info.getTools(),
+                            info.getCreatedTime(),
                             info.getRemarks());
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,5 +75,17 @@ public class GrowInfoMapper {
         String resultStr = new String(result, StandardCharsets.UTF_8);
         List<GrowInfo> growInfos = JSON.parseArray(resultStr, GrowInfo.class);
         return growInfos == null ? new ArrayList<>() : growInfos;
+    }
+
+    public int count() {
+        byte[] result;
+        try {
+            result = contract.evaluateTransaction("GetCount");
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        String count = new String(result, StandardCharsets.UTF_8);
+        return Integer.parseInt(count);
     }
 }

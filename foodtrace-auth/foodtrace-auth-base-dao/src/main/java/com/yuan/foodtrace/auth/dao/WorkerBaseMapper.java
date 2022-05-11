@@ -35,7 +35,7 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface WorkerBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
-    BasicColumn[] selectList = BasicColumn.columnList(id, name, idNumber, phoneNumber, age, gender);
+    BasicColumn[] selectList = BasicColumn.columnList(id, name, idNumber, phoneNumber, age, gender, company);
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -61,12 +61,13 @@ public interface WorkerBaseMapper {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="WorkerRecordResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="id_number", property="idNumber", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone_number", property="phoneNumber", jdbcType=JdbcType.VARCHAR),
         @Result(column="age", property="age", jdbcType=JdbcType.INTEGER),
-        @Result(column="gender", property="gender", jdbcType=JdbcType.BIT)
+        @Result(column="gender", property="gender", jdbcType=JdbcType.BIT),
+        @Result(column="company", property="company", jdbcType=JdbcType.VARCHAR)
     })
     List<WorkerRecord> selectMany(SelectStatementProvider selectStatement);
 
@@ -85,7 +86,7 @@ public interface WorkerBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
-    default int deleteByPrimaryKey(String id_) {
+    default int deleteByPrimaryKey(Long id_) {
         return delete(c -> 
             c.where(id, isEqualTo(id_))
         );
@@ -100,6 +101,7 @@ public interface WorkerBaseMapper {
             .map(phoneNumber).toProperty("phoneNumber")
             .map(age).toProperty("age")
             .map(gender).toProperty("gender")
+            .map(company).toProperty("company")
         );
     }
 
@@ -112,6 +114,7 @@ public interface WorkerBaseMapper {
             .map(phoneNumber).toProperty("phoneNumber")
             .map(age).toProperty("age")
             .map(gender).toProperty("gender")
+            .map(company).toProperty("company")
         );
     }
 
@@ -124,6 +127,7 @@ public interface WorkerBaseMapper {
             .map(phoneNumber).toPropertyWhenPresent("phoneNumber", record::getPhoneNumber)
             .map(age).toPropertyWhenPresent("age", record::getAge)
             .map(gender).toPropertyWhenPresent("gender", record::getGender)
+            .map(company).toPropertyWhenPresent("company", record::getCompany)
         );
     }
 
@@ -143,7 +147,7 @@ public interface WorkerBaseMapper {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
-    default Optional<WorkerRecord> selectByPrimaryKey(String id_) {
+    default Optional<WorkerRecord> selectByPrimaryKey(Long id_) {
         return selectOne(c ->
             c.where(id, isEqualTo(id_))
         );
@@ -161,7 +165,8 @@ public interface WorkerBaseMapper {
                 .set(idNumber).equalTo(record::getIdNumber)
                 .set(phoneNumber).equalTo(record::getPhoneNumber)
                 .set(age).equalTo(record::getAge)
-                .set(gender).equalTo(record::getGender);
+                .set(gender).equalTo(record::getGender)
+                .set(company).equalTo(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
@@ -171,7 +176,8 @@ public interface WorkerBaseMapper {
                 .set(idNumber).equalToWhenPresent(record::getIdNumber)
                 .set(phoneNumber).equalToWhenPresent(record::getPhoneNumber)
                 .set(age).equalToWhenPresent(record::getAge)
-                .set(gender).equalToWhenPresent(record::getGender);
+                .set(gender).equalToWhenPresent(record::getGender)
+                .set(company).equalToWhenPresent(record::getCompany);
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: worker")
@@ -182,6 +188,7 @@ public interface WorkerBaseMapper {
             .set(phoneNumber).equalTo(record::getPhoneNumber)
             .set(age).equalTo(record::getAge)
             .set(gender).equalTo(record::getGender)
+            .set(company).equalTo(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }
@@ -194,6 +201,7 @@ public interface WorkerBaseMapper {
             .set(phoneNumber).equalToWhenPresent(record::getPhoneNumber)
             .set(age).equalToWhenPresent(record::getAge)
             .set(gender).equalToWhenPresent(record::getGender)
+            .set(company).equalToWhenPresent(record::getCompany)
             .where(id, isEqualTo(record::getId))
         );
     }

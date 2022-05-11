@@ -1,94 +1,102 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yuan.foodtrace.auth.controller.api.FarmApi;
-import com.yuan.foodtrace.auth.dto.FarmDTO;
+import com.yuan.foodtrace.auth.domain.command.FarmDeleteCommand;
+import com.yuan.foodtrace.auth.domain.command.FarmInsertCommand;
+import com.yuan.foodtrace.auth.domain.command.FarmUpdateCommand;
+import com.yuan.foodtrace.auth.domain.request.FarmDeleteRequest;
+import com.yuan.foodtrace.auth.domain.request.FarmInsertRequest;
+import com.yuan.foodtrace.auth.domain.request.FarmUpdateRequest;
 import com.yuan.foodtrace.auth.entity.FarmRecord;
 import com.yuan.foodtrace.auth.service.FarmService;
+import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
+
+import static com.yuan.foodtrace.auth.utils.ReturnUtils.*;
 
 @RestController
 public class FarmController implements FarmApi {
 
     @Autowired
-    FarmService service;
-
-    JSONObject jsonObject = null;
+    FarmService farmService;
 
     @Override
     public Object listFarm() {
-        jsonObject = new JSONObject();
-        List<FarmRecord> list = service.list();
-        jsonObject.put("result", list);
-        return jsonObject;
+        String company = TokenUtils.getCompany();
+        List<FarmRecord> farmList;
+        if ("admin".equalsIgnoreCase(company)) {
+            farmList = farmService.list();
+        } else {
+            farmList = farmService.listWithCompany(company);
+        }
+        return returnListData(farmList);
     }
 
     @Override
-    public Object newFarm(FarmDTO dto) {
-        jsonObject = new JSONObject();
-        if (StringUtils.isEmpty(dto.getName())) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`name` is empty");
-            return jsonObject;
+    public Object newFarm(FarmInsertRequest request) {
+        if (Objects.isNull(request)) {
+            return returnFalseResultWithReason("`request` is empty");
         }
-        if (StringUtils.isEmpty(dto.getCompany())) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`company` is empty");
-            return jsonObject;
+        if (StringUtils.isEmpty(request.getName())) {
+            return returnFalseResultWithReason("`name` is empty");
         }
-        if (StringUtils.isEmpty(dto.getLocation())) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`location` is empty");
-            return jsonObject;
+        if (StringUtils.isEmpty(request.getCompany())) {
+            return returnFalseResultWithReason("`company` is empty");
+        }
+        if (StringUtils.isEmpty(request.getLocation())) {
+            return returnFalseResultWithReason("`location` is empty");
         }
 
-        boolean result = service.insert(dto);
-        jsonObject.put("result", result);
-        return jsonObject;
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Worker To Other Company");
+        }
+        FarmInsertCommand command = FarmInsertCommand.fromRequest(request, operatorCompany);
+
+        if (!farmService.insert(command)) {
+            return returnFailWithNoReason(OperateType.INSERT);
+        }
+        return returnTrueResult();
     }
 
     @Override
-    public Object deleteFarm(FarmDTO dto) {
-        jsonObject = new JSONObject();
-        if (StringUtils.isEmpty(dto.getId())) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`dto.id` is empty");
-            return jsonObject;
+    public Object deleteFarm(FarmDeleteRequest request) {
+        if (request.getId() == null) {
+            return returnFalseResultWithReason("`id` is empty.");
         }
-        boolean result = service.delete(dto);
-        jsonObject.put("result", result);
-        return jsonObject;
+        if (StringUtils.isEmpty(request.getName())) {
+            return returnFalseResultWithReason("`name` is empty.");
+        }
+
+        FarmDeleteCommand command = FarmDeleteCommand.fromRequest(request, TokenUtils.getCompany());
+
+        if (!farmService.delete(command)) {
+            return returnFailWithNoReason(OperateType.DELETE);
+        }
+        return returnTrueResult();
     }
 
     @Override
-    public Object updateFarm(FarmDTO dto) {
-        jsonObject = new JSONObject();
-        if (StringUtils.isEmpty(dto.getId())) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`dto.id` is empty");
-            return jsonObject;
+    public Object updateFarm(FarmUpdateRequest request) {
+        if (request.getId() == null) {
+            return returnFalseResultWithReason("`id` is empty.");
         }
-        boolean result = service.update(dto);
-        jsonObject.put("result", result);
-        return jsonObject;
+
+        String operatorCompany = TokenUtils.getCompany();
+        if (!TokenUtils.checkRoleEqualToAdmin(operatorCompany) && StringUtils.equals(request.getCompany(), operatorCompany)) {
+            return returnFalseResultWithReason("Can Not New A Worker To Other Company");
+        }
+        FarmUpdateCommand command = FarmUpdateCommand.fromRequest(request, operatorCompany);
+
+        if (!farmService.update(command)) {
+            return returnFailWithNoReason(OperateType.UPDATE);
+        }
+        return returnTrueResult();
     }
 
-    @Override
-    public Object findOne(String id) {
-        jsonObject = new JSONObject();
-        if (StringUtils.isEmpty(id)) {
-            jsonObject.put("result", false);
-            jsonObject.put("errorInfo", "`id` is empty");
-            return jsonObject;
-        }
-        FarmDTO dto = new FarmDTO();
-        dto.setId(id);
-        FarmRecord result = service.queryOne(dto);
-        jsonObject.put("result", result);
-        return jsonObject;
-    }
 }

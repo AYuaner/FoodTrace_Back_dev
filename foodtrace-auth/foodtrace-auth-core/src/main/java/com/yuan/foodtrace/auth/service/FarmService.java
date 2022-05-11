@@ -1,53 +1,125 @@
 package com.yuan.foodtrace.auth.service;
 
-import com.yuan.foodtrace.auth.dto.FarmDTO;
+import com.yuan.foodtrace.auth.domain.command.FarmDeleteCommand;
+import com.yuan.foodtrace.auth.domain.command.FarmInsertCommand;
+import com.yuan.foodtrace.auth.domain.command.FarmUpdateCommand;
 import com.yuan.foodtrace.auth.entity.FarmRecord;
-import com.yuan.foodtrace.auth.entity.UserRecord;
 import com.yuan.foodtrace.auth.mapper.FarmMapper;
-import com.yuan.foodtrace.auth.utils.MapperUtils;
+import com.yuan.foodtrace.auth.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class FarmService {
 
     @Autowired
-    FarmMapper mapper;
+    FarmMapper farmMapper;
 
+    /**
+     * get the list of farm owned by operator's company.
+     *
+     * @param operatorCompany the company work at or onw
+     * @return list of FarmRecord
+     */
+    public List<FarmRecord> listWithCompany(String operatorCompany) {
+        return farmMapper.listWithCompany(operatorCompany);
+    }
+
+
+    /**
+     * get list of all farm
+     *
+     * @return list of FarmRecord
+     */
     public List<FarmRecord> list() {
-        return mapper.list();
+        return farmMapper.list();
     }
 
-    public boolean insert(FarmDTO dto) {
-        FarmRecord recordById = mapper.selectByPrimaryKey(dto.getId()).orElse(new FarmRecord());
-
-        if (recordById.getId() == null) {
-            FarmRecord farmRecord = MapperUtils.FarmDTOToEntity(dto);
-            return mapper.insertSelective(farmRecord) == 0 ? false : true;
+    /**
+     * insert a new farm record.
+     *
+     * @param command the arguments INSERT need
+     * @return result of operation
+     */
+    public boolean insert(FarmInsertCommand command) {
+        if (!_validateNameNoUse(command.getName())) {
+            return false;
         }
-        return false;
-    }
-
-    public boolean delete(FarmDTO dto) {
-        mapper.selectByPrimaryKey(dto.getId()).orElseThrow(() -> new RuntimeException("该id农场不存在"));
-        return mapper.deleteByPrimaryKey(dto.getId()) == 0 ? false : true;
-    }
-
-    public boolean update(FarmDTO dto) {
-        mapper.selectByPrimaryKey(dto.getId()).orElseThrow(() -> new RuntimeException("该id农场不存在"));
-        FarmRecord farmRecord = MapperUtils.FarmDTOToEntity(dto);
-        return mapper.updateByPrimaryKeySelective(farmRecord) == 0 ? false : true;
-    }
-
-    public FarmRecord queryOne(FarmDTO dto) {
-        if (StringUtils.isEmpty(dto.getId())) {
-            throw new RuntimeException("PrimaryKey is Empty");
+        if (!StringUtils.equals(command.getCompany(), command.getOperatorCompany())) {
+            return false;
         }
-        return mapper.selectByPrimaryKey(dto.getId()).orElseThrow(() -> new RuntimeException("该id农场不存在"));
+        FarmRecord record = new FarmRecord();
+        record.setName(command.getName());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
+        record.setLocation(command.getLocation());
+        return farmMapper.insert(record) == 0 ? false : true;
+    }
+
+    /**
+     * delete a farm record.
+     *
+     * @param command the arguments DELETE need
+     * @return result of operation
+     */
+    public boolean delete(FarmDeleteCommand command) {
+        if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
+            return false;
+        }
+        if (!_validateIdAndName(command.getId(), command.getName())) {
+            return false;
+        }
+        return farmMapper.deleteByPrimaryKey(command.getId()) == 0 ? false : true;
+    }
+
+    /**
+     * update a farm record.
+     *
+     * @param command a record with new value of field
+     * @return result of operation
+     */
+    public boolean update(FarmUpdateCommand command) {
+        if (!_validateIdAndCompany(command.getId(), command.getOperatorCompany())) {
+            return false;
+        }
+        FarmRecord record = new FarmRecord();
+        record.setId(command.getId());
+        record.setName(command.getName());
+        if (TokenUtils.checkRoleEqualToAdmin(command.getOperatorCompany())) {
+            record.setCompany(command.getCompany());
+        }
+        record.setCompany(command.getOperatorCompany());
+        record.setLocation(command.getLocation());
+        return farmMapper.updateByPrimaryKeySelective(record) == 0 ? false : true;
+    }
+
+    /**
+     * to ensure `name` not be used.
+     */
+    private boolean _validateNameNoUse(String name) {
+        FarmRecord record = farmMapper.findByName(name).orElse(new FarmRecord());
+        return record.getId() == null;
+    }
+
+    /**
+     * to ensure operator can only operate the record his company own.
+     */
+    private boolean _validateIdAndCompany(Long id, String operatorCompany) {
+        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElse(new FarmRecord());
+        return StringUtils.equals(record.getCompany(), operatorCompany) // operator's company
+                || "admin".equalsIgnoreCase(operatorCompany);   // admin
+    }
+
+    /**
+     * to ensure `id` and `name` can match.
+     */
+    private boolean _validateIdAndName(Long id, String name) {
+        FarmRecord record = farmMapper.selectByPrimaryKey(id).orElse(new FarmRecord());
+        return StringUtils.equals(record.getName(), name);
     }
 }

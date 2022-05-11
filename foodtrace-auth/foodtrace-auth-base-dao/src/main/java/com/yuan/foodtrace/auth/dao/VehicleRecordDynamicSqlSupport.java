@@ -14,7 +14,7 @@ public final class VehicleRecordDynamicSqlSupport {
      *   车辆标识码
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.id")
-    public static final SqlColumn<String> id = vehicleRecord.id;
+    public static final SqlColumn<Long> id = vehicleRecord.id;
 
     /**
      * Database Column Remarks:
@@ -44,9 +44,16 @@ public final class VehicleRecordDynamicSqlSupport {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.license")
     public static final SqlColumn<String> license = vehicleRecord.license;
 
+    /**
+     * Database Column Remarks:
+     *   所属公司
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: vehicle.company")
+    public static final SqlColumn<String> company = vehicleRecord.company;
+
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source Table: vehicle")
     public static final class VehicleRecord extends SqlTable {
-        public final SqlColumn<String> id = column("id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<String> brand = column("brand", JDBCType.VARCHAR);
 
@@ -55,6 +62,8 @@ public final class VehicleRecordDynamicSqlSupport {
         public final SqlColumn<String> buyYear = column("buy_year", JDBCType.VARCHAR);
 
         public final SqlColumn<String> license = column("license", JDBCType.VARCHAR);
+
+        public final SqlColumn<String> company = column("company", JDBCType.VARCHAR);
 
         public VehicleRecord() {
             super("vehicle");

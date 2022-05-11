@@ -2,7 +2,7 @@ package com.yuan.foodtrace.auth.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.domain.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -19,8 +19,11 @@ public class TokenService {
         long currentTime = System.currentTimeMillis() + 60 * 60 * 1000;
         Date end = new Date(currentTime);
 
-        return  JWT.create()
+        System.out.println("company" + userDTO.getCompany());
+
+        return JWT.create()
                 .withAudience(userDTO.getUsername())
+                .withClaim("company", userDTO.getCompany())
                 .withIssuedAt(start)
                 .withExpiresAt(end)
                 .sign(Algorithm.HMAC256(userDTO.getPassword()));

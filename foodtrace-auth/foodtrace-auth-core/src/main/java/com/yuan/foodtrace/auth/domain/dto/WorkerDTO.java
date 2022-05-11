@@ -1,4 +1,4 @@
-package com.yuan.foodtrace.auth.dto;
+package com.yuan.foodtrace.auth.domain.dto;
 
 import com.yuan.foodtrace.auth.entity.WorkerRecord;
 
@@ -12,6 +12,7 @@ public class WorkerDTO implements Serializable {
     private String phoneNumber;
     private Integer age;
     private Boolean gender;
+    private String company;
 
     private static final long serialVersionUID = 1L;
 
@@ -61,6 +62,14 @@ public class WorkerDTO implements Serializable {
 
     public void setGender(Boolean gender) {
         this.gender = gender;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override

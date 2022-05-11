@@ -1,7 +1,7 @@
 package com.yuan.foodtrace.auth.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.yuan.foodtrace.auth.dto.Result;
+import com.yuan.foodtrace.auth.domain.Result;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

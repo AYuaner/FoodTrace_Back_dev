@@ -1,7 +1,9 @@
 package com.yuan.foodtrace.auth.controller.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yuan.foodtrace.auth.dto.UserDTO;
+import com.yuan.foodtrace.auth.annotation.UserLoginToken;
+import com.yuan.foodtrace.auth.domain.dto.UserDTO;
+import com.yuan.foodtrace.auth.domain.request.UserLoginRequest;
 import com.yuan.foodtrace.auth.service.TokenService;
 import com.yuan.foodtrace.auth.service.UserService;
 import com.yuan.foodtrace.auth.controller.api.UserApi;
@@ -30,17 +32,17 @@ public class UserController implements UserApi {
      * 登录
      */
     @Override
-    public Object login(UserDTO userDTO, HttpServletResponse response) {
+    public Object login(UserLoginRequest request, HttpServletResponse response) {
         JSONObject jsonObject = new JSONObject();
-        if (StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(userDTO.getPassword())) {
+        if (StringUtils.isEmpty(request.getUsername()) || StringUtils.isEmpty(request.getPassword())) {
             jsonObject.put("message", "登录失败，账号或密码为空");
             return jsonObject;
         }
-        UserDTO userForBase = userService.findByUsername(userDTO.getUsername());
-        if (!StringUtils.equals(userForBase.getPassword(), userDTO.getPassword())) {
+        UserDTO queryUser = userService.findByUsername(request.getUsername());
+        if (!StringUtils.equals(queryUser.getPassword(), request.getPassword())) {
             jsonObject.put("message", "登录失败，密码错误");
         } else {
-            String token = tokenService.getToken(userForBase);
+            String token = tokenService.getToken(queryUser);
             jsonObject.put("token", token);
 
             Cookie cookie = new Cookie("token", token);
@@ -50,6 +52,7 @@ public class UserController implements UserApi {
         return jsonObject;
     }
 
+    @UserLoginToken
     @Override
     public Object getInfo() {
         JSONObject jsonObject = new JSONObject();
@@ -60,12 +63,12 @@ public class UserController implements UserApi {
         ArrayList<String> roles = new ArrayList<>();
         roles.add(userInfo.getRole());
 
+
         jsonObject.put("roles", roles);
         jsonObject.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         jsonObject.put("name", userInfo.getUsername());
 
         return jsonObject;
     }
-
 
 }

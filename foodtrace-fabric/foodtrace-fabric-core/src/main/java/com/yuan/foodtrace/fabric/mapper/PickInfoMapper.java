@@ -5,11 +5,13 @@ import com.yuan.foodtrace.fabric.entity.PickInfo;
 import com.yuan.foodtrace.fabric.utils.FabricUtils;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PickInfoMapper {
 
     private final Contract contract = FabricUtils.getContract("PickInfo");
@@ -35,6 +37,7 @@ public class PickInfoMapper {
                             info.getOperateTime(),
                             info.getOperatorId(),
                             info.getOperatorName(),
+                            info.getCreatedTime(),
                             info.getRemarks());
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,5 +58,17 @@ public class PickInfoMapper {
         String resultStr = new String(result, StandardCharsets.UTF_8);
         List<PickInfo> pickInfos = JSON.parseArray(resultStr, PickInfo.class);
         return pickInfos == null ? new ArrayList<>() : pickInfos;
+    }
+
+    public int count() {
+        byte[] result;
+        try {
+            result = contract.evaluateTransaction("GetCount");
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        String count = new String(result, StandardCharsets.UTF_8);
+        return Integer.parseInt(count);
     }
 }

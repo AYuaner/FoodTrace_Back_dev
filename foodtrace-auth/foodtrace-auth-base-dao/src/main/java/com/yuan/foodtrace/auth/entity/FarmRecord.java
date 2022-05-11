@@ -14,7 +14,7 @@ public class FarmRecord implements Serializable {
      *   农场 ID
      */
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: farm.id")
-    private String id;
+    private Long id;
 
     /**
      * Database Column Remarks:
@@ -41,12 +41,12 @@ public class FarmRecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: farm.id")
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", comments="Source field: farm.id")
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
